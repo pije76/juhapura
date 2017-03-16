@@ -26,4 +26,10 @@ urlpatterns = [
         view=views.UserUpdateView.as_view(),
         name='update'
     ),
+
+    url(
+        regex=r'^~profile/$',
+        view=views.UserBasicProfileUpdateForm.as_view(),
+        name='profile_update'
+    ),
 ]

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}User: {{ object.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-12">
+    
+     {% if object.name %}
+        <h2>{{ object.name }}</h2>
+      {% else %}
+         <h2>{{ object.username }}</h2>
+      {% endif %}
+    </div>
+  </div>
+
+{% if object == request.user %}
+<!-- Action buttons -->
+<div class="row">
+
+ <form action="{{ action }}" method="POST" class="form-horizontal">
+  {% csrf_token %}
+  <ul>
+   {{ form.non_field_errors }}
+  <div class="fieldWrapper">
+      {{ form.name.errors }}
+      <label for="{{ form.name.id_for_label }}">Name</label>
+      {{ form.name }}
+  </div>
+
+  <div class="fieldWrapper">
+      {{ form.dob.errors }}
+      <label for="{{ form.dob.id_for_label }}">Date of birth</label>
+      {{ form.dob }}
+  </div>
+
+  <div class="fieldWrapper">
+      {{ form.gender.errors }}
+      <label for="{{ form.gender.id_for_label }}">Gender</label>
+      {{ form.gender }}
+  </div>
+
+  <div class="fieldWrapper">
+      {{ form.location.errors }}
+      <label for="{{ form.name.id_for_label }}">Area</label>
+      {{ form.location }}
+  </div>
+
+  <div class="fieldWrapper">
+      {{ form.marital_status.errors }}
+      <label for="{{ form.marital_status.id_for_label }}">Marital Status</label>
+      {{ form.marital_status }}
+  </div>
+
+ <div class="fieldWrapper">
+      {{ form.city.errors }}
+      <label for="{{ form.city.id_for_label }}">City</label>
+      {{ form.city }}
+  </div>
+<!-- 
+  <div class="fieldWrapper">
+      {{ form.country.errors }}
+      <label for="{{ form.country.id_for_label }}">country</label>
+      {{ form.country }}
+  </div> -->
+
+
+  </ul>
+  <input type="submit" value="Save" />
+</form>
+
+</div>
+<!-- End Action buttons -->
+{% endif %}
+
+
+</div>
+{% endblock content %}
+
