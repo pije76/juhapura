@@ -65,3 +65,6 @@ juhapura/media/
 
 staticfiles/
 env/
+semantic/
+node_modules/
+semantic.json

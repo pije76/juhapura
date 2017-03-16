@@ -27,28 +27,34 @@ class User(AbstractUser):
 
     # First Name and Last Name do not cover name patterns
     # around the globe.
-    gender_list = [(0,'Male'), (1,'Female')]
+    gender_list = [('M','Male'), ('F','Female')]
 
     marital_status_list = [
     (0, 'Unmarried'),
-    (1,'Divorcee'),
-    (2,'Seperated'),
-    (3,'Widow/Widower')
+    (1, 'Divorcee'),
+    (2, 'Seperated'),
+    (3, 'Widow/Widower')
     ]
 
     name = models.CharField(_('Name of User'), blank=True, max_length=255)
 
     dob = models.DateField(_('Date of Birth'), null=True)
 
-    gender = models.IntegerField(choices=gender_list, default = 0, null = True)
+    gender = models.CharField(choices=gender_list, default = 'M', null = True, max_length=1)
 
     location = models.CharField(_('Location'), blank=True, max_length=255)
 
     marital_status = models.IntegerField(choices=marital_status_list, null = True)
 
-    city = models.ForeignKey(Cities, unique = False, default=333)
+    address_line1 = models.CharField(_('Address Line 1'), blank = True, max_length=255)
 
-    #country = models.ForeignKey(Country,max_length=255, default = 107)
+    address_line2 = models.CharField(_('Address Line 2'), blank = True, max_length=255)
+
+    address_line3 = models.CharField(_('Address Line 3'), blank = True, max_length=255)
+
+    city = models.ForeignKey(Cities)
+
+    country = models.ForeignKey(Country,to_field="name", db_constraint=False, on_delete=models.CASCADE, default = "India")
 
     def __str__(self):
         return self.username

@@ -10,7 +10,56 @@ from .models import User
 class UserBasicProfileUpdateForm(forms.ModelForm):
 
 
-    gender_list = [(0,'Male'), (1,'Female')]
+    gender_list = [('','Gender'), ('M','Male'), ('F','Female')]
+
+    name = forms.CharField()
+
+    dob = forms.DateField()
+
+    gender = forms.ChoiceField(choices=gender_list, 
+    	widget=forms.Select(attrs={'class': 'ui search dropdown'}))
+
+    location = forms.CharField()
+
+    marital_status = forms.ChoiceField(choices = User.marital_status_list, 
+    	widget=forms.Select(attrs={'class': 'ui search dropdown'}))
+
+    # city = forms.ChoiceField(forms.Select(attrs={'class': 'ui search dropdown'}))
+    
+    class Meta:
+        model = User
+        fields = [
+        'name'
+        ,'dob'
+        ,'gender'
+        ,'location'
+        ,'marital_status'
+        ,'address_line1'
+        ,'address_line2'
+        ,'address_line3' 
+        ,'city'
+        ,'country'
+        ]
+
+    def __init__(self, *args, **kwargs):
+
+        if kwargs.get('instance'):
+            name = kwargs['instance'].name
+            # kwargs.setdefault('initial', {})['confirm_email'] = email
+            # dob'].widget.format = '%d/%m/%Y'
+            widgets = {
+            # 'dob': forms.DateInput(attrs={'class':'myDateClass', 
+            #                                 'placeholder':'Select a date'})
+            'city':forms.Select(attrs={'class':'ui search dropdown'})
+        	}
+            # self.fields['city'].widget = ListTextWidget(class='test')
+        return super(UserBasicProfileUpdateForm, self).__init__(*args, **kwargs)
+
+
+class UserContactInformationForm(forms.ModelForm):
+
+
+    Address = [(0,'Male'), (1,'Female')]
 
     name = forms.CharField()
 
@@ -19,7 +68,7 @@ class UserBasicProfileUpdateForm(forms.ModelForm):
     	)
 
 
-    gender = forms.ChoiceField(choices=gender_list, widget=forms.RadioSelect())
+    address_line1 = forms.CharField()
 
     location = forms.CharField()
 
@@ -27,7 +76,12 @@ class UserBasicProfileUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['name','dob','gender','location','marital_status', 'city'
+        fields = ['name'
+        ,'dob'
+        ,'gender'
+        ,'location'
+        ,'marital_status'
+        , 'city'
         # ,'country'
         ]
 

@@ -11,13 +11,15 @@ from django.views import defaults as default_views
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
+     url(r'^contact-us/$', TemplateView.as_view(template_name='pages/contact-us.html'), name='contact-us'),
 
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, admin.site.urls),
 
     # User management
-    url(r'^users/', include('juhapura.users.urls', namespace='users')),
+    url(r'^martimonial/', include('juhapura.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^property/', include('juhapura.property.urls', namespace='property')),
 
     # Your stuff: custom urls includes go here
 

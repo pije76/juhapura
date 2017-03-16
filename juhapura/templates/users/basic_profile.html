@@ -21,55 +21,86 @@
 <!-- Action buttons -->
 <div class="row">
 
- <form action="{{ action }}" method="POST" class="form-horizontal">
+ <form action="{{ action }}" method="POST" class="form-horizontal ui form">
+ <h4 class="ui dividing header">Basic Information</h4>
   {% csrf_token %}
   <ul>
    {{ form.non_field_errors }}
-  <div class="fieldWrapper">
+   <div class="three fields">
+  <div class="field">
       {{ form.name.errors }}
       <label for="{{ form.name.id_for_label }}">Name</label>
       {{ form.name }}
   </div>
+</div>
+  <div class="three fields fieldWrapper">
 
-  <div class="fieldWrapper">
+  <div class="field">
       {{ form.dob.errors }}
       <label for="{{ form.dob.id_for_label }}">Date of birth</label>
       {{ form.dob }}
   </div>
 
-  <div class="fieldWrapper">
-      {{ form.gender.errors }}
-      <label for="{{ form.gender.id_for_label }}">Gender</label>
-      {{ form.gender }}
+     <div class="field">
+        {{ form.gender.errors }}
+        <label for="{{ form.gender.id_for_label }}">Gender</label>
+          {{ form.gender}}
+        </div> 
+   
+    <div class="field">
+        {{ form.marital_status.errors }}
+        <label for="{{ form.marital_status.id_for_label }}">Marital Status</label>
+        {{ form.marital_status }}
+    </div>
+
   </div>
 
-  <div class="fieldWrapper">
+  <div class="three fields fieldWrapper">
+
+
+   <div class="field">
+      {{ form.address_line1.errors }}
+      <label for="{{ form.address_line1.id_for_label }}">Address line 1</label>
+      {{ form.address_line1 }}
+  </div>
+
+   <div class="field">
+      {{ form.address_line2.errors }}
+      <label for="{{ form.address_line2.id_for_label }}">Address line 2</label>
+      {{ form.address_line2 }}
+  </div>
+   <div class="field">
+      {{ form.address_line3.errors }}
+      <label for="{{ form.address_line3.id_for_label }}">Address line 3</label>
+      {{ form.address_line3 }}
+  </div>
+</div>
+<div class="three fields fieldWrapper">
+  <div class="field">
       {{ form.location.errors }}
       <label for="{{ form.name.id_for_label }}">Area</label>
       {{ form.location }}
   </div>
 
-  <div class="fieldWrapper">
-      {{ form.marital_status.errors }}
-      <label for="{{ form.marital_status.id_for_label }}">Marital Status</label>
-      {{ form.marital_status }}
-  </div>
-
- <div class="fieldWrapper">
+ <div class="field">
       {{ form.city.errors }}
       <label for="{{ form.city.id_for_label }}">City</label>
       {{ form.city }}
   </div>
-<!-- 
-  <div class="fieldWrapper">
-      {{ form.country.errors }}
-      <label for="{{ form.country.id_for_label }}">country</label>
-      {{ form.country }}
-  </div> -->
 
+  <div class="field">
+      {{ form.country.errors }}
+      <label for="{{ form.country.id_for_label }}">Country</label>
+      {{ form.country }}
+  </div>
+</div>
 
   </ul>
-  <input type="submit" value="Save" />
+
+  
+  <input class="ui primary button right floated" type="submit" value="Save" />
+
+  
 </form>
 
 </div>

@@ -28,4 +28,13 @@ $(function(){
 		dateFormat:'yy-mm-dd'
 	}
 	);
-})();
+});
+
+$('.ui.radio.checkbox')
+  .checkbox()
+;
+$('select.dropdown')
+  .dropdown()
+;
+$("#id_city").addClass("ui search dropdown");
+$("#id_country").addClass("ui search dropdown");
