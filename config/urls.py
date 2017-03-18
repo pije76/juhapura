@@ -17,7 +17,7 @@ urlpatterns = [
     url(settings.ADMIN_URL, admin.site.urls),
 
     # User management
-    url(r'^martimonial/', include('juhapura.users.urls', namespace='users')),
+    url(r'^matrimonial/', include('juhapura.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^property/', include('juhapura.property.urls', namespace='property')),
 
