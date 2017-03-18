@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}User: {{ object.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+
+
+    <h1 class="ui header">
+     {% if object.name %}
+        <h2>{{ object.name }}</h2>
+      {% else %}
+         <h2>{{ object.username }}</h2>
+      {% endif %}
+
+{% if object == request.user %}
+<!-- Action buttons -->
+<div class="row">
+
+ <form action="{{ action }}" method="POST" class="form-horizontal ui form">
+ 
+ <h4 class="ui dividing header">Religion</h4>
+  {% csrf_token %}
+  
+  <ul>
+     {{ form.non_field_errors }}
+
+<div class="field">
+        {{ form.sect.errors }}
+        <label for="{{ form.sect.id_for_label }}">Sect</label>
+        {{ form.sect }}
+    </div>
+
+ <div class="two fields">
+  
+  <div class="field">
+      {{ form.hijab.errors }}
+      <label for="{{ form.hijab.id_for_label }}">Hijab</label>
+      {{ form.hijab }}
+  </div>
+
+  <div class="field">
+      {{ form.beard.errors }}
+      <label for="{{ form.beard.id_for_label }}">Beard</label>
+      {{ form.beard }}
+  </div>
+
+  </div>
+
+<div class="two fields">
+ 
+  </div>
+
+  </ul>
+
+  <input class="ui primary button right floated" type="submit" value="Save" />
+  
+  
+</form>
+
+</div>
+<!-- End Action buttons -->
+{% endif %}
+
+
+</div>
+{% endblock content %}
+

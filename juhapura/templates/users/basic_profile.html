@@ -6,16 +6,13 @@
 {% block content %}
 <div class="container">
 
-  <div class="row">
-    <div class="col-sm-12">
-    
+
+    <h1 class="ui header">
      {% if object.name %}
         <h2>{{ object.name }}</h2>
       {% else %}
          <h2>{{ object.username }}</h2>
       {% endif %}
-    </div>
-  </div>
 
 {% if object == request.user %}
 <!-- Action buttons -->
@@ -29,8 +26,13 @@
    <div class="three fields">
   <div class="field">
       {{ form.name.errors }}
-      <label for="{{ form.name.id_for_label }}">Name</label>
+      <label for="{{ form.name.id_for_label }}">Forename</label>
       {{ form.name }}
+  </div>
+  <div class="field">
+      {{ form.surname.errors }}
+      <label for="{{ form.surname.id_for_label }}">Surname</label>
+      {{ form.surname }}
   </div>
 </div>
   <div class="three fields fieldWrapper">
@@ -84,7 +86,7 @@
 
  <div class="field">
       {{ form.city.errors }}
-      <label for="{{ form.city.id_for_label }}">City</label>
+      <label for="{{ form.city.id_for_label }}">City - State</label>
       {{ form.city }}
   </div>
 
@@ -92,6 +94,13 @@
       {{ form.country.errors }}
       <label for="{{ form.country.id_for_label }}">Country</label>
       {{ form.country }}
+  </div>
+</div>
+<div class="three fields fieldWrapper">
+<div class="field">
+      {{ form.reason_registration.errors }}
+      <label for="{{ form.reason_registration.id_for_label }}">Reason for registration?</label>
+      {{ form.reason_registration }}
   </div>
 </div>
 

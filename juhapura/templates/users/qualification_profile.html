@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}User: {{ object.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+
+
+    <h1 class="ui header">
+     {% if object.name %}
+        <h2>{{ object.name }}</h2>
+      {% else %}
+         <h2>{{ object.username }}</h2>
+      {% endif %}
+
+{% if object == request.user %}
+<!-- Action buttons -->
+<div class="row">
+
+ <form action="{{ action }}" method="POST" class="form-horizontal ui form">
+ 
+ <h4 class="ui dividing header">Qualification & Work</h4>
+  {% csrf_token %}
+  
+  <ul>
+     {{ form.non_field_errors }}
+
+ <div class="two fields">
+    <div class="field">
+      {{ form.qualification.errors }}
+      <label for="{{ form.qualification.id_for_label }}">Qualification</label>
+      {{ form.qualification }}
+  </div>
+  </div>
+
+
+<div class="two fields">
+    <div class="field">
+        {{ form.qualification_summary.errors }}
+        <label for="{{ form.qualification_summary.id_for_label }}">Qualification Summary</label>
+        {{ form.qualification_summary }}
+    </div>
+</div>
+<div class="two fields">
+    <div class="field">
+      {{ form.occupation.errors }}
+      <label for="{{ form.occupation.id_for_label }}">Occupation</label>
+      {{ form.occupation }}
+  </div>
+</div>
+<div class="two fields">
+
+    <div class="field">
+        {{ form.occupation_summary.errors }}
+        <label for="{{ form.occupation_summary.id_for_label }}">Occupation Summary</label>
+        {{ form.occupation_summary }}
+    </div>
+</div>
+
+<div class="two fields">
+    <div class="field">
+      {{ form.income.errors }}
+      <label for="{{ form.income.id_for_label }}">Income</label>
+      {{ form.income }}
+  </div>
+</div>
+
+  </ul>
+
+  <input class="ui primary button right floated" type="submit" value="Save" />
+  
+  
+</form>
+
+</div>
+<!-- End Action buttons -->
+{% endif %}
+
+
+</div>
+{% endblock content %}
+

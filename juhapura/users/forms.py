@@ -25,11 +25,15 @@ class UserBasicProfileUpdateForm(forms.ModelForm):
     	widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
     # city = forms.ChoiceField(forms.Select(attrs={'class': 'ui search dropdown'}))
-    
+    reason_registration = forms.ChoiceField(choices = User.reason_registration_list,
+    	widget=forms.Select(attrs={'class': 'ui search dropdown'}))
+
+
     class Meta:
         model = User
         fields = [
         'name'
+        ,'surname'
         ,'dob'
         ,'gender'
         ,'location'
@@ -39,6 +43,7 @@ class UserBasicProfileUpdateForm(forms.ModelForm):
         ,'address_line3' 
         ,'city'
         ,'country'
+        ,'reason_registration'
         ]
 
     def __init__(self, *args, **kwargs):
@@ -56,46 +61,90 @@ class UserBasicProfileUpdateForm(forms.ModelForm):
         return super(UserBasicProfileUpdateForm, self).__init__(*args, **kwargs)
 
 
-class UserContactInformationForm(forms.ModelForm):
+class UserAboutInformationForm(forms.ModelForm):   
 
+    about_me = forms.CharField(widget=forms.Textarea)
 
-    Address = [(0,'Male'), (1,'Female')]
-
-    name = forms.CharField()
-
-    dob = forms.DateField(
-    	 # input_formats=('%d-%m-%Y')
-    	)
-
-
-    address_line1 = forms.CharField()
-
-    location = forms.CharField()
-
-    marital_status = forms.ChoiceField(choices = User.marital_status_list)
+    looking_for = forms.CharField(widget=forms.Textarea)
 
     class Meta:
         model = User
-        fields = ['name'
-        ,'dob'
-        ,'gender'
-        ,'location'
-        ,'marital_status'
-        , 'city'
-        # ,'country'
+        fields = [
+        'about_me'
+        ,'looking_for'
         ]
 
     def __init__(self, *args, **kwargs):
 
         if kwargs.get('instance'):
             name = kwargs['instance'].name
-            # kwargs.setdefault('initial', {})['confirm_email'] = email
-            # dob'].widget.format = '%d/%m/%Y'
-            widgets = {
-            'dob': forms.DateInput(#format=('%d-%m-%Y'), 
+            # self.fields['about_me'].widget.attrs = { 'placeholder':'About me', 'rows':'10'}
+            # self.fields['looking_for'].widget.attrs = { 'placeholder':'What I Am Looking For?', 'rows':'10'}
 
-                                             attrs={'class':'myDateClass', 
-                                            'placeholder':'Select a date'})
-        }
 
-        return super(UserBasicProfileUpdateForm, self).__init__(*args, **kwargs)
+        return super(UserAboutInformationForm, self).__init__(*args, **kwargs)
+
+
+
+class UserQualifcationWorkInformationForm(forms.ModelForm):   
+
+    qualification = forms.ChoiceField(choices = User.qualification_list, 
+        widget=forms.Select(attrs={'class': 'ui search dropdown'}))
+
+    qualification_summary = forms.CharField(widget=forms.Textarea)
+
+    occupation = forms.ChoiceField(choices = User.occupation_list, 
+        widget=forms.Select(attrs={'class': 'ui search dropdown'}))
+
+    occupation_summary = forms.CharField(widget=forms.Textarea)
+
+    income = forms.ChoiceField(choices = User.income_list, 
+        widget=forms.Select(attrs={'class': 'ui search dropdown'}))
+
+    class Meta:
+        model = User
+        fields = [
+        'qualification'
+        ,'qualification_summary'
+        ,'occupation'
+        ,'occupation_summary'
+        ,'income'
+        ]
+
+    def __init__(self, *args, **kwargs):
+
+        if kwargs.get('instance'):
+            name = kwargs['instance'].name
+            # self.fields['about_me'].widget.attrs = { 'placeholder':'About me', 'rows':'10'}
+            # self.fields['looking_for'].widget.attrs = { 'placeholder':'What I Am Looking For?', 'rows':'10'}
+
+
+        return super(UserQualifcationWorkInformationForm, self).__init__(*args, **kwargs)
+
+
+class UserReligionInformationForm(forms.ModelForm):   
+
+    sect = forms.CharField()
+
+    hijab = forms.ChoiceField(choices = User.yes_no_list, 
+        widget=forms.Select(attrs={'class': 'ui search dropdown'}))
+
+    beard = forms.ChoiceField(choices = User.yes_no_list, 
+        widget=forms.Select(attrs={'class': 'ui search dropdown'}))
+
+    class Meta:
+        model = User
+        fields = [
+        'sect',
+        'hijab'
+        ,'beard'
+        ]
+
+    def __init__(self, *args, **kwargs):
+
+        if kwargs.get('instance'):
+            name = kwargs['instance'].name
+            # self.fields['about_me'].widget.attrs = { 'placeholder':'About me', 'rows':'10'}
+            # self.fields['looking_for'].widget.attrs = { 'placeholder':'What I Am Looking For?', 'rows':'10'}
+
+        return super(UserReligionInformationForm, self).__init__(*args, **kwargs)
