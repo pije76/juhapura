@@ -11,7 +11,7 @@ from django.conf import settings
 from countries_plus.models import Country
 
 
-@python_2_unicode_compatible
+
 class Cities(models.Model):
     city_id = models.AutoField(primary_key=True)
     city_name = models.CharField(max_length=100, blank=True, null=True)
@@ -155,7 +155,7 @@ class User(AbstractUser):
         return reverse('users:detail', kwargs={'username': self.username})
 
 
-@python_2_unicode_compatible
+
 class ProfileImage(models.Model):
     profile_image = models.FileField(upload_to='profile_images', blank=True, null=True)
     user = models.ForeignKey(User)    
