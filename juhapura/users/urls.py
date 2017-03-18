@@ -40,6 +40,12 @@ urlpatterns = [
     ),
 
     url(
+        regex=r'^~imageupload/$',
+        view=views.UserProfileImageUploadView.as_view(),
+        name='profile_upload'
+    ),
+
+    url(
         regex=r'^~qualification/$',
         view=views.UserQualifcationWorkInformationForm.as_view(),
         name='qualification_update'

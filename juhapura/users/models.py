@@ -6,9 +6,12 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 from countries_plus.models import Country
 
+
+@python_2_unicode_compatible
 class Cities(models.Model):
     city_id = models.AutoField(primary_key=True)
     city_name = models.CharField(max_length=100, blank=True, null=True)
@@ -21,6 +24,7 @@ class Cities(models.Model):
 
     def __str__(self):
         return ' - '.join([self.city_name, self.city_state])
+
 
 @python_2_unicode_compatible
 class User(AbstractUser):
@@ -151,4 +155,14 @@ class User(AbstractUser):
         return reverse('users:detail', kwargs={'username': self.username})
 
 
+@python_2_unicode_compatible
+class ProfileImage(models.Model):
+    profile_image = models.FileField(upload_to='profile_images', blank=True, null=True)
+    user = models.ForeignKey(User)    
+
+    @property
+    def userid(self):
+        return self.user.username
+    # def get_username(self):
+    #     return self.username
 

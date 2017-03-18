@@ -4,8 +4,9 @@ from __future__ import unicode_literals, absolute_import
 
 from django import forms
 from django.core.exceptions import ValidationError
+from multiupload.fields import MultiImageField
 
-from .models import User
+from .models import User, ProfileImage
 
 class UserBasicProfileUpdateForm(forms.ModelForm):
 
@@ -85,7 +86,6 @@ class UserAboutInformationForm(forms.ModelForm):
         return super(UserAboutInformationForm, self).__init__(*args, **kwargs)
 
 
-
 class UserQualifcationWorkInformationForm(forms.ModelForm):   
 
     qualification = forms.ChoiceField(choices = User.qualification_list, 
@@ -122,7 +122,7 @@ class UserQualifcationWorkInformationForm(forms.ModelForm):
         return super(UserQualifcationWorkInformationForm, self).__init__(*args, **kwargs)
 
 
-class UserReligionInformationForm(forms.ModelForm):   
+class UserReligionInformationForm(forms.Form):   
 
     sect = forms.CharField()
 
@@ -148,3 +148,21 @@ class UserReligionInformationForm(forms.ModelForm):
             # self.fields['looking_for'].widget.attrs = { 'placeholder':'What I Am Looking For?', 'rows':'10'}
 
         return super(UserReligionInformationForm, self).__init__(*args, **kwargs)
+
+
+class UserProfileImageUploadForm(forms.Form):
+    # For images (requires Pillow for validation):
+    profile_image = MultiImageField(min_num=1, max_num=3, max_file_size=1024*1024*5)
+
+    class Meta:
+        model = ProfileImage
+
+    # def __init__(self, *args, **kwargs):
+
+        
+
+    #     if kwargs.get('instance'):
+    #         ProfileImage.user = self.request.user.id
+
+    #     return super(UserProfileImageUploadForm, self).__init__(*args, **kwargs)
+

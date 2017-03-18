@@ -2,13 +2,31 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.core.urlresolvers import reverse
-from django.views.generic import DetailView, ListView, RedirectView, UpdateView, TemplateView
+from django.views.generic import DetailView, ListView, RedirectView, UpdateView, TemplateView, FormView
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import User
-from .forms import UserBasicProfileUpdateForm,UserAboutInformationForm,UserQualifcationWorkInformationForm,UserReligionInformationForm
+from .models import User, ProfileImage
+from .forms import UserBasicProfileUpdateForm \
+                    ,UserAboutInformationForm \
+                    ,UserQualifcationWorkInformationForm\
+                    ,UserReligionInformationForm \
+                    ,UserProfileImageUploadForm
 
+class UserProfileImageUploadView(LoginRequiredMixin, FormView):
+    template_name = 'users/upload_profile.html'
+    form_class = UserProfileImageUploadForm
+    success_url = '/matrimonial/~imageupload/'
+
+    model = ProfileImage, User
+
+    def form_valid(self, form):
+
+        for each in form.cleaned_data['profile_image']:
+            ProfileImage.objects.create(profile_image=each,user=self.request.user)
+    
+
+        return super(UserProfileImageUploadView, self).form_valid(form)
 
 class UserDetailView(LoginRequiredMixin, DetailView):
     model = User
@@ -23,7 +41,6 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self):
         return reverse('users:detail',
                        kwargs={'username': self.request.user.username})
-
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
@@ -49,12 +66,14 @@ class UserListView(LoginRequiredMixin, ListView):
     slug_field = 'username'
     slug_url_kwarg = 'username'
 
+
 class MatrimonialHomePageView(LoginRequiredMixin,TemplateView):
     model = User
     # These next two lines tell the view to index lookups by username
     slug_field = 'username'
     slug_url_kwarg = 'username'    
     template_name = 'users/matrimonial.html'
+
 
 class UserBasicProfileUpdateForm(LoginRequiredMixin, UpdateView):
     slug_field = 'username'
@@ -105,7 +124,6 @@ class UserQualifcationWorkInformationForm(LoginRequiredMixin, UpdateView):
     def get_object(self):
         # Only get the User record for the user making the request
         return User.objects.get(username=self.request.user.username)
-
 
 
 class UserReligionInformationForm(LoginRequiredMixin, UpdateView):

@@ -12,6 +12,9 @@ django-environ==0.4.1
 django-braces==1.11.0
 django-crispy-forms==1.6.1
 
+#multi-upload 
+django-multiupload==0.5.2
+
 # Models
 django-model-utils==2.6.1
 
