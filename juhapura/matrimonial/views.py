@@ -61,7 +61,7 @@ class ProfileActivateView(LoginRequiredMixin,CreateView):
 
     def get_object(self):
         # Only get the User record for the user making the request
-        return Profile.objects.get(user=self.request.user.id)
+        return Profile.objects.filter(user=self.request.user.id)
 
 class ProfileImageUploadView(LoginRequiredMixin, FormView):
     template_name = 'matrimonial/upload_profile.html'
@@ -121,7 +121,7 @@ class MatrimonialHomePageView(LoginRequiredMixin,TemplateView):
 
     def get_object(self):
         # Only get the User record for the user making the request
-        return Profile.objects.get(user=self.request.user.id)
+        return Profile.objects.filter(user=self.request.user.id)
 
     def get_context_data(self, **kwargs):
         context = super(MatrimonialHomePageView, self).get_context_data(**kwargs)
