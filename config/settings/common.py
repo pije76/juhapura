@@ -105,13 +105,13 @@ EMAIL_HOST = 'smtp.webfaction.com'
 EMAIL_HOST_USER = 'juhapura'
 EMAIL_HOST_PASSWORD = 'C0mptu3r#.'
 DEFAULT_FROM_EMAIL = 'no-reply@juhapura.com'
-SERVER_EMAIL = 'contact@juhapura.com'
+SERVER_EMAIL = 'hello@juhapura.com'
 
 # MANAGER CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = (
-    ("""Rizwan Mansuri""", 'mr.mansuri@gmail.com'),
+    ("""Rizwan Mansuri""", 'hello@juhapura.com'),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers

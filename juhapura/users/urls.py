@@ -47,7 +47,7 @@ urlpatterns = [
 
     url(
         regex=r'^~qualification/$',
-        view=views.UserQualifcationWorkInformationForm.as_view(),
+        view=views.UserQualificationWorkInformationForm.as_view(),
         name='qualification_update'
     ),
 
@@ -55,5 +55,11 @@ urlpatterns = [
         regex=r'^~religion/$',
         view=views.UserReligionInformationForm.as_view(),
         name='religion_update'
+    ),
+
+     url(
+        regex=r'^~family/$',
+        view=views.UserFamilyInformationForm.as_view(),
+        name='family_update'
     ),
 ]

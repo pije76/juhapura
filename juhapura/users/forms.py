@@ -86,7 +86,7 @@ class UserAboutInformationForm(forms.ModelForm):
         return super(UserAboutInformationForm, self).__init__(*args, **kwargs)
 
 
-class UserQualifcationWorkInformationForm(forms.ModelForm):   
+class UserQualificationWorkInformationForm(forms.ModelForm):   
 
     qualification = forms.ChoiceField(choices = User.qualification_list, 
         widget=forms.Select(attrs={'class': 'ui search dropdown'}))
@@ -119,10 +119,10 @@ class UserQualifcationWorkInformationForm(forms.ModelForm):
             # self.fields['looking_for'].widget.attrs = { 'placeholder':'What I Am Looking For?', 'rows':'10'}
 
 
-        return super(UserQualifcationWorkInformationForm, self).__init__(*args, **kwargs)
+        return super(UserQualificationWorkInformationForm, self).__init__(*args, **kwargs)
 
 
-class UserReligionInformationForm(forms.Form):   
+class UserReligionInformationForm(forms.ModelForm):   
 
     sect = forms.CharField()
 
@@ -140,29 +140,48 @@ class UserReligionInformationForm(forms.Form):
         ,'beard'
         ]
 
-    def __init__(self, *args, **kwargs):
+    # def __init__(self, *args, **kwargs):
 
-        if kwargs.get('instance'):
-            name = kwargs['instance'].name
-            # self.fields['about_me'].widget.attrs = { 'placeholder':'About me', 'rows':'10'}
-            # self.fields['looking_for'].widget.attrs = { 'placeholder':'What I Am Looking For?', 'rows':'10'}
-
-        return super(UserReligionInformationForm, self).__init__(*args, **kwargs)
+    #     if kwargs.get('instance'):
+    #         name = kwargs['instance'].name
+          
+    #     return super(UserReligionInformationForm, self).__init__(*args, **kwargs)
 
 
 class UserProfileImageUploadForm(forms.Form):
-    # For images (requires Pillow for validation):
-    profile_image = MultiImageField(min_num=1, max_num=3, max_file_size=1024*1024*5)
+    # For images (requires Pillow for validation 2MB):
+    profile_image = MultiImageField(min_num=1, max_num=3, max_file_size=1024*1024*2)
 
     class Meta:
         model = ProfileImage
 
-    # def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
 
+        import pdb
+        pdb.set_trace()
         
+        if kwargs.get('instance'):
+            user = kwargs['instance'].user
+        
+            instance = ProfileImage.objects.filter(user=self.request.user.id)
 
-    #     if kwargs.get('instance'):
-    #         ProfileImage.user = self.request.user.id
+        return super(UserProfileImageUploadForm, self).__init__(*args, **kwargs)
 
-    #     return super(UserProfileImageUploadForm, self).__init__(*args, **kwargs)
+class UserFamilyInformationForm(forms.ModelForm): 
+    
+    father_name = forms.CharField()
 
+    mother_name = forms.CharField()
+
+    parent_contact_no = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'One of your parent contact detail'}))
+
+    family_summary = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Please briefly describe about your sibling information and family history'}))
+
+    class Meta:
+        model = User
+        fields = [
+        'father_name'
+        ,'mother_name'
+        ,'parent_contact_no'
+        ,'family_summary'
+        ]

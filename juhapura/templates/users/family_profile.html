@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}User: {{ object.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+
+
+    <h1 class="ui header">
+     {% if object.name %}
+        <h2>{{ object.name }}</h2>
+      {% else %}
+         <h2>{{ object.username }}</h2>
+      {% endif %}
+
+{% if object == request.user %}
+<!-- Action buttons -->
+<div class="row">
+
+ <form action="{{ action }}" method="POST" class="form-horizontal ui form">
+ 
+ <h4 class="ui dividing header">Family Summary</h4>
+  {% csrf_token %}
+  
+  <ul>
+     {{ form.non_field_errors }}
+
+
+ <div class="three fields">
+
+   <div class="field">
+          {{ form.father_name.errors }}
+          <label for="{{ form.father_name.id_for_label }}">Father name</label>
+          {{ form.father_name }}
+      </div>
+    
+    <div class="field">
+        {{ form.mother_name.errors }}
+        <label for="{{ form.mother_name.id_for_label }}">Mother name</label>
+        {{ form.mother_name }}
+    </div>
+
+    <div class="field">
+        {{ form.parent_contact_no.errors }}
+        <label for="{{ form.parent_contact_no.id_for_label }}">Contact number</label>
+        {{ form.parent_contact_no }}
+  </div>
+
+  </div>
+
+  <div class="field">
+      {{ form.family_summary.errors }}
+      <label for="{{ form.family_summary.id_for_label }}">Family Summary</label>
+      {{ form.family_summary }}
+  </div>
+
+
+  </ul>
+
+  <input class="ui primary button right floated" type="submit" value="Save" />
+  
+  
+</form>
+
+<a href="{% url 'users:qualification_update' %}"><button class="ui primary button right floated">Next</button></a>
+
+
+
+</div>
+<!-- End Action buttons -->
+{% endif %}
+
+
+</div>
+{% endblock content %}
+

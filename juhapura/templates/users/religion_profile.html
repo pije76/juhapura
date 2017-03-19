@@ -26,19 +26,21 @@
   <ul>
      {{ form.non_field_errors }}
 
-<div class="field">
-        {{ form.sect.errors }}
-        <label for="{{ form.sect.id_for_label }}">Sect</label>
-        {{ form.sect }}
-    </div>
-
- <div class="two fields">
-  
+<div class="two fields">
   <div class="field">
-      {{ form.hijab.errors }}
-      <label for="{{ form.hijab.id_for_label }}">Hijab</label>
-      {{ form.hijab }}
-  </div>
+          {{ form.sect.errors }}
+          <label for="{{ form.sect.id_for_label }}">Sect</label>
+          {{ form.sect }}
+      </div>
+</div>
+
+   <div class="two fields">
+    
+    <div class="field">
+        {{ form.hijab.errors }}
+        <label for="{{ form.hijab.id_for_label }}">Hijab</label>
+        {{ form.hijab }}
+    </div>
 
   <div class="field">
       {{ form.beard.errors }}

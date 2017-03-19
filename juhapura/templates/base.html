@@ -81,7 +81,7 @@
 
       {% if messages %}
           {% for message in messages %}
-              <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+              <div class="ui message {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
           {% endfor %}
       {% endif %}
 
@@ -90,6 +90,7 @@
         
 
         <button class="ui teal basic button"><a href="/matrimonial">Juhapura Matrimonial Service</a></button>
+        <button class="ui teal basic button"><a href="/property">Juhapura Property</a></button>
       {% endblock content %}
 
       <div class="ui inline cookie nag">
