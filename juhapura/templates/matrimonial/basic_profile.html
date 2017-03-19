@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}User: {% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+
+    <h1 class="ui header">
+     
+
+<!-- Action buttons -->
+<div class="row">
+
+ <form action="{{ action }}" method="POST" class="form-horizontal ui form">
+ <h4 class="ui dividing header">Basic Information</h4>
+  {% csrf_token %}
+  <ul>
+   {{ form.non_field_errors }}
+   <div class="three fields">
+  <div class="field">
+      {{ form.first_name.errors }}
+      <label for="{{ form.first_name.id_for_label }}">Forename</label>
+      {{ form.first_name }}
+  </div>
+  <div class="field">
+      {{ form.surname.errors }}
+      <label for="{{ form.surname.id_for_label }}">Surname</label>
+      {{ form.surname }}
+  </div>
+</div>
+  <div class="three fields fieldWrapper">
+
+  <div class="field">
+      {{ form.dob.errors }}
+      <label for="{{ form.dob.id_for_label }}">Date of birth</label>
+      {{ form.dob }}
+  </div>
+
+     <div class="field">
+        {{ form.gender.errors }}
+        <label for="{{ form.gender.id_for_label }}">Gender</label>
+          {{ form.gender}}
+        </div> 
+   
+    <div class="field">
+        {{ form.marital_status.errors }}
+        <label for="{{ form.marital_status.id_for_label }}">Marital Status</label>
+        {{ form.marital_status }}
+    </div>
+
+  </div>
+
+  <div class="three fields fieldWrapper">
+
+
+   <div class="field">
+      {{ form.address_line1.errors }}
+      <label for="{{ form.address_line1.id_for_label }}">Address line 1</label>
+      {{ form.address_line1 }}
+  </div>
+
+   <div class="field">
+      {{ form.address_line2.errors }}
+      <label for="{{ form.address_line2.id_for_label }}">Address line 2</label>
+      {{ form.address_line2 }}
+  </div>
+   <div class="field">
+      {{ form.address_line3.errors }}
+      <label for="{{ form.address_line3.id_for_label }}">Address line 3</label>
+      {{ form.address_line3 }}
+  </div>
+</div>
+<div class="three fields fieldWrapper">
+  <div class="field">
+      {{ form.location.errors }}
+      <label for="{{ form.name.id_for_label }}">Area</label>
+      {{ form.location }}
+  </div>
+
+ <div class="field">
+      {{ form.city.errors }}
+      <label for="{{ form.city.id_for_label }}">City - State</label>
+      {{ form.city }}
+  </div>
+
+  <div class="field">
+      {{ form.country.errors }}
+      <label for="{{ form.country.id_for_label }}">Country</label>
+      {{ form.country }}
+  </div>
+</div>
+<div class="three fields fieldWrapper">
+<div class="field">
+      {{ form.reason_registration.errors }}
+      <label for="{{ form.reason_registration.id_for_label }}">Reason for registration?</label>
+      {{ form.reason_registration }}
+  </div>
+</div>
+
+  </ul>
+
+  
+  <input class="ui primary button right floated" type="submit" value="Save" />
+
+   
+</form>
+</div>
+<!-- End Action buttons -->
+
+
+
+</div>
+{% endblock content %}
+

@@ -17,11 +17,13 @@ urlpatterns = [
     url(settings.ADMIN_URL, admin.site.urls),
 
     # User management
-    url(r'^matrimonial/', include('juhapura.users.urls', namespace='users')),
+    url(r'^users/', include('juhapura.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^property/', include('juhapura.property.urls', namespace='property')),
 
+    
     # Your stuff: custom urls includes go here
+    url(r'^matrimonial/', include('juhapura.matrimonial.urls', namespace='matrimonial')),
+    url(r'^property/', include('juhapura.property.urls', namespace='property')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
