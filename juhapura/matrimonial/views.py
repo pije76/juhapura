@@ -69,34 +69,36 @@ class ProfileImageUploadView(LoginRequiredMixin, FormView):
     success_url = 'matrimonial/~imageupload/'
 
     model = ProfileImage
-    slug_field = 'user'
-    slug_url_kwarg = 'user'
+   
 
     def form_valid(self, form):
        
         user = self.request.user
-
         # form.valid_check(user=user)
-
+       
+        user = User.objects.get(pk=self.request.user.id)
+        profile = Profile.objects.get(user=user)
         for each in form.cleaned_data['profile_image']:
-            if (ProfileImage.objects.filter(user=user).count() < 3):
-                ProfileImage.objects.create(profile_image=each,user=user)
+
+            if (ProfileImage.objects.filter(profile=profile).count() < 3):
+               
+                ProfileImage.objects.create(profile_image=each,profile=profile)
             else:
                 messages.error(self.request, "Only 3 pictures allowed per profile")
         
-        images = ProfileImage.objects.filter(user=user)
+        images = ProfileImage.objects.filter(profile=profile)
 
 
         return super(ProfileImageUploadView, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse('users:detail',
-                       kwargs={'username': self.request.user.username, 
-                              'images': ProfileImage.objects.filter(user=self.request.user)})
+        return reverse('matrimonial:profile')
 
     def get_object(self):
         # Only get the User record for the user making the request
-        return ProfileImage.objects.get(user=self.request.user.username)
+        user = User.objects.get(pk=self.request.user)
+        profile = Profile.objects.get(user=user)
+        return ProfileImage.objects.get(profile=profile)
 
 # class BasicProfileUpdateView(LoginRequiredMixin, UpdateView):
 
@@ -137,27 +139,25 @@ class BasicProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     # send the user back to their own page after a successful update
     def get_success_url(self):
-        return reverse('matrimonial:profile_update')
+        return reverse('matrimonial:personal_update')
 
     def get_object(self):
         # Only get the User record for the user making the request
         return Profile.objects.get(user=self.request.user.id)
 
 class AboutMeProfileView(LoginRequiredMixin, UpdateView):
-    slug_field = 'username'
-    slug_url_kwarg = 'username'
+
     model = Profile
     template_name = 'matrimonial/aboutme_profile.html'
     form_class = AboutMeProfileForm
 
     # send the user back to their own page after a successful update
     def get_success_url(self):
-        return reverse('users:detail',
-                       kwargs={'username': self.request.user.username})
+        return reverse('matrimonial:qualification_update')
 
     def get_object(self):
         # Only get the User record for the user making the request
-        return User.objects.get(username=self.request.user.username)
+        return Profile.objects.get(user=self.request.user.id)
 
 class QualificationWorkProfileView(LoginRequiredMixin, UpdateView):
     slug_field = 'username'
@@ -168,12 +168,12 @@ class QualificationWorkProfileView(LoginRequiredMixin, UpdateView):
 
     # send the user back to their own page after a successful update
     def get_success_url(self):
-        return reverse('users:detail',
-                       kwargs={'username': self.request.user.username})
+        return reverse('matrimonial:religion_update')
 
     def get_object(self):
         # Only get the User record for the user making the request
-        return User.objects.get(username=self.request.user.username)
+        return Profile.objects.get(user=self.request.user.id)
+
 
 class ReligionProfileView(LoginRequiredMixin, UpdateView):
     slug_field = 'username'
@@ -184,12 +184,12 @@ class ReligionProfileView(LoginRequiredMixin, UpdateView):
 
     # send the user back to their own page after a successful update
     def get_success_url(self):
-        return reverse('users:detail',
-                       kwargs={'username': self.request.user.username})
+        return reverse('matrimonial:family_update')
 
     def get_object(self):
         # Only get the User record for the user making the request
-        return User.objects.get(username=self.request.user.username)
+        return Profile.objects.get(user_id=self.request.user.id)
+
 
 class FamilyProfileView(LoginRequiredMixin, UpdateView):
     slug_field = 'username'
@@ -200,9 +200,40 @@ class FamilyProfileView(LoginRequiredMixin, UpdateView):
 
     # send the user back to their own page after a successful update
     def get_success_url(self):
-        return reverse('users:detail',
-                       kwargs={'username': self.request.user.username})
+        return reverse('matrimonial:image_upload')
 
     def get_object(self):
         # Only get the User record for the user making the request
-        return User.objects.get(username=self.request.user.username)
+        return Profile.objects.get(user=self.request.user.id)
+
+
+class UserProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'matrimonial/profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(UserProfileView, self).get_context_data(**kwargs)
+        context["profile"] = Profile.objects.get(user= self.request.user.id)
+        context["profile_images"] = ProfileImage.objects.filter(profile= context["profile"])
+        return context
+
+
+    def get(self, request, *args, **kwargs):
+       context = self.get_context_data()
+       return self.render_to_response(context)
+
+
+    # def get_queryset(self):
+    #     current_user = User.objects.get(pk=self.request.user.id)
+
+    #     # Must filter by author to prevent making everyone's notes public
+    #     queryset = Profile.objects.filter(user=current_user)
+
+    #     return queryset
+
+
+    # def get_object(self):
+        
+    #     return Profile.objects.get(user = self.request.user)       
+
+    # def get_profile_images(self):
+    #     return ProfileImage.objects.get(user_id = self.request.user.id)

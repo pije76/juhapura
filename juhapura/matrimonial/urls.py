@@ -28,7 +28,7 @@ urlpatterns = [
     url(
         regex=r'^~imageupload/$',
         view=views.ProfileImageUploadView.as_view(),
-        name='profile_upload'
+        name='image_upload'
     ),
 
     url(
@@ -53,5 +53,11 @@ urlpatterns = [
         regex=r'^~activate/$',
         view=views.ProfileActivateView.as_view(),
         name='activate'
+    ),
+
+      url(
+        regex=r'^~user_profile/$',
+        view=views.UserProfileView.as_view(),
+        name='profile'
     ),
 ]

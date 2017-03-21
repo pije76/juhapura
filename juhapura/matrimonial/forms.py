@@ -74,15 +74,21 @@ class AboutMeProfileForm(forms.ModelForm):
         ,'looking_for'
         ]
 
-    # def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
 
-    #     if kwargs.get('instance'):
-    #         name = kwargs['instance'].name
-    #         # self.fields['about_me'].widget.attrs = { 'placeholder':'About me', 'rows':'10'}
-    #         # self.fields['looking_for'].widget.attrs = { 'placeholder':'What I Am Looking For?', 'rows':'10'}
+        if kwargs.get('instance'):
+            # name = kwargs['instance'].name
+            widgets = {
+            # 'dob': forms.DateInput(attrs={'class':'myDateClass', 
+            #                                 'placeholder':'Select a date'})
+            'about_me':forms.Textarea(attrs={'placeholder':'About me', 'rows':'10'}),
+            'looking_for':forms.Textarea(attrs={'placeholder':'What I Am Looking For?', 'rows':'10'})
+            }
+            # self.fields['about_me'].widget.attrs = { 'placeholder':'About me', 'rows':'10'}
+            # self.fields['looking_for'].widget.attrs = { 'placeholder':'What I Am Looking For?', 'rows':'10'}
 
 
-    #     return super(AboutMeProfileForm, self).__init__(*args, **kwargs)
+        return super(AboutMeProfileForm, self).__init__(*args, **kwargs)
 
 class QualificationWorkProfileForm(forms.ModelForm):   
 
@@ -154,9 +160,9 @@ class ProfileImageUploadForm(forms.Form):
     def __init__(self, *args, **kwargs):
         
         if kwargs.get('instance'):
-            user = kwargs['instance'].user
+            # user = kwargs['instance'].user
         
-            instance = ProfileImage.objects.filter(user=self.request.user.id)
+            instance = ProfileImage.objects.filter(user_id=self.request.user.id)
 
         return super(ProfileImageUploadForm, self).__init__(*args, **kwargs)
 

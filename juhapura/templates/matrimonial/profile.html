@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+This Profile
+{% endblock %}
+ 
+
+
+
+{% block content %}
+<h1>{{profile.first_name}} {{profile.surname}}</h1>
+
+<div class="ui info message">
+  <i class="close icon"></i>
+  <div class="header">
+    We are still developing this page...
+  </div>
+  <ul class="list">
+    <li>Although, you can update your profile and visit us soon.</li>
+    <li>This service will be free for benefit for our community</li>
+  </ul>
+</div>
+
+
+<h1></h1>
+{% endblock content %}

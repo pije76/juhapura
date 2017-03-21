@@ -420,4 +420,4 @@ class Profile(models.Model):
 
 class ProfileImage(models.Model):
     profile_image = models.FileField(upload_to='profile_images', blank=True, null=True)
-    user = models.ForeignKey(Profile)  
+    profile = models.ForeignKey(Profile)  

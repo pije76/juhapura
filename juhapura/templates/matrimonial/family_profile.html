@@ -14,7 +14,6 @@
          <h2>{{ object.username }}</h2>
       {% endif %}
 
-{% if object == request.user %}
 <!-- Action buttons -->
 <div class="row">
 
@@ -63,13 +62,8 @@
   
 </form>
 
-<a href="{% url 'matrimonial:qualification_update' %}"><button class="ui primary button right floated">Next</button></a>
-
-
-
 </div>
 <!-- End Action buttons -->
-{% endif %}
 
 
 </div>
