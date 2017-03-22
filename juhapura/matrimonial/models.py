@@ -327,8 +327,7 @@ class Profile(models.Model):
     complexion_list = [
         (1,'Dark'),
         (2,'Fair'),
-        (3,'Very Fair'),
-        (4,'Wheatish Brown'),
+        (3,'Wheatish Brown'),
         ]
 
 

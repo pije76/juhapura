@@ -20,8 +20,6 @@ class User(AbstractUser):
         blank=True, 
         max_length=255)
 
-    family_summary = models.TextField(null=True)
-
     def __str__(self):
         return self.username
 
