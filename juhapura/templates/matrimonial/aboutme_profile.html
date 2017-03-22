@@ -4,27 +4,50 @@
 {% block title %}User: {{ object.name }}{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="ui container">
 
 
-    <h1 class="ui header">
-     {% if object.name %}
-        <h2>{{ object.name }}</h2>
-      {% else %}
-         <h2>{{ object.username }}</h2>
-      {% endif %}
+    <h1 class="ui dividing header">About me</h1>
 
 
-<!-- Action buttons -->
-<div class="row">
 
  <form action="{{ action }}" method="POST" class="form-horizontal ui form">
  
- <h4 class="ui dividing header">About me</h4>
-  {% csrf_token %}
+   {% csrf_token %}
+
+    <div class="ui teal progress" id="progressbar2">
+    <div class="bar"></div>
+    <div class="label"></div>
+  </div>
   
   <ul>
      {{ form.non_field_errors }}
+
+     <div class="two fields">
+        <div class="field">
+          {{ form.height.errors }}
+          <label for="{{ form.height.id_for_label }}">Height</label>
+          {{ form.height }}
+      </div>
+       <div class="field">
+          {{ form.weight.errors }}
+          <label for="{{ form.weight.id_for_label }}">Weight</label>
+          {{ form.weight }}
+      </div>
+    </div>
+
+     <div class="two fields">
+        <div class="field">
+          {{ form.body_type.errors }}
+          <label for="{{ form.body_type.id_for_label }}">Body type</label>
+          {{ form.body_type }}
+      </div>
+       <div class="field">
+          {{ form.complexion.errors }}
+          <label for="{{ form.complexion.id_for_label }}">Complexion</label>
+          {{ form.complexion }}
+      </div>
+    </div>
 
     <div class="field">
         {{ form.about_me.errors }}
@@ -46,7 +69,7 @@
   
 </form>
 
-</div>
+
 <!-- End Action buttons -->
 
 

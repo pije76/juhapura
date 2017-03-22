@@ -4,7 +4,14 @@
 {% block title %}User: {{object.user}}{% endblock %}
 
 {% block content %}
-<h4 class="ui dividing header">Upload profile picture</h4>
+
+<h1 class="ui dividing header">Upload profile picture</h1>
+
+  <div class="ui teal progress" id="progressbar6">
+    <div class="bar"></div>
+    <div class="label"></div>
+  </div>
+
 {{ object.instance}}
 
 <form action="" method="post" enctype="multipart/form-data">

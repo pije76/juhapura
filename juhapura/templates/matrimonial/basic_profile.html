@@ -6,17 +6,22 @@
 {% block content %}
 
 
-<div class="container">
+<div class="ui container">
 
-    <h1 class="ui header">
+    <h1 class="ui dividing header">Basic Information</h1>
      
 
 <!-- Action buttons -->
-<div class="row">
+
 
  <form action="{{ action }}" method="POST" class="form-horizontal ui form">
- <h4 class="ui dividing header">Basic Information</h4>
   {% csrf_token %}
+
+  <div class="ui teal progress" id="progressbar1">
+    <div class="bar"></div>
+    <div class="label"></div>
+  </div>
+
   <ul>
    {{ form.non_field_errors }}
    <div class="three fields">
@@ -107,7 +112,7 @@
 
    
 </form>
-</div>
+
 <!-- End Action buttons -->
 
 

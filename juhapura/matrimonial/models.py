@@ -317,6 +317,21 @@ class Profile(models.Model):
         (130, "Other")
     	]
 
+    body_type_list = [
+        (1, 'Athletic'),
+        (2, 'Average'),
+        (3, 'Slim'),
+        (4, 'Heavy')
+        ]
+
+    complexion_list = [
+        (1,'Dark'),
+        (2,'Fair'),
+        (3,'Very Fair'),
+        (4,'Wheatish Brown'),
+        ]
+
+
     yes_no_list = [
 	    (1,'Yes'),
 	    (0,'No')
@@ -362,6 +377,20 @@ class Profile(models.Model):
     country = models.ForeignKey(Country,to_field="name", 
         db_constraint=False, on_delete=models.CASCADE, 
         default = "India")
+
+    height = models.CharField(_('Height'), 
+        blank = True, 
+        max_length=255)
+
+    weight = models.CharField(_('Weight'), 
+        blank = True, 
+        max_length=255)
+
+    body_type = models.IntegerField(choices=body_type_list, 
+        null=True)
+
+    complexion = models.IntegerField(choices=complexion_list, 
+        null=True)
 
     about_me = models.TextField(null=True)
 

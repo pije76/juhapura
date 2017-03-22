@@ -6,22 +6,21 @@
 {% block content %}
 <div class="container">
 
+ <h1 class="ui dividing header">Family Summary</h1>
 
-    <h1 class="ui header">
-     {% if object.name %}
-        <h2>{{ object.name }}</h2>
-      {% else %}
-         <h2>{{ object.username }}</h2>
-      {% endif %}
 
 <!-- Action buttons -->
 <div class="row">
 
  <form action="{{ action }}" method="POST" class="form-horizontal ui form">
  
- <h4 class="ui dividing header">Family Summary</h4>
   {% csrf_token %}
   
+  <div class="ui teal progress" id="progressbar5">
+    <div class="bar"></div>
+    <div class="label"></div>
+  </div>
+
   <ul>
      {{ form.non_field_errors }}
 

@@ -63,15 +63,23 @@ class BasicProfileUpdateForm(forms.ModelForm):
 
 class AboutMeProfileForm(forms.ModelForm):   
 
-    about_me = forms.CharField(widget=forms.Textarea)
+    height = forms.CharField(widget=forms.TextInput(attrs={'placehoder':'ex 5ft 3inch'}));
 
-    looking_for = forms.CharField(widget=forms.Textarea)
+    weight = forms.CharField(widget=forms.TextInput(attrs={'placehoder':'in Kg'}));
+
+    about_me = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Briefy describe about yourself', 'rows':'10'}));    
+
+    looking_for = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Please brief regarding your expected partner quality', 'rows':'10'}));    
 
     class Meta:
         model = Profile
         fields = [
-        'about_me'
-        ,'looking_for'
+        'height',
+        'weight',
+        'body_type',
+        'complexion',
+        'about_me',
+        'looking_for'
         ]
 
     def __init__(self, *args, **kwargs):
@@ -152,7 +160,7 @@ class ReligionProfileForm(forms.ModelForm):
 
 class ProfileImageUploadForm(forms.Form):
     # For images (requires Pillow for validation 2MB):
-    profile_image = MultiImageField(min_num=1, max_num=3, max_file_size=1024*1024*2)
+    profile_image = MultiImageField(min_num=1, max_num=3, max_file_size=1024*1024*2, required=False)
 
     class Meta:
         model = ProfileImage

@@ -38,3 +38,27 @@ $('select.dropdown')
 ;
 $("#id_city").addClass("ui search dropdown");
 $("#id_country").addClass("ui search dropdown");
+$("#id_body_type").addClass("ui search dropdown");
+$("#id_complexion").addClass("ui search dropdown");
+
+
+$('#progressbar1').progress({
+  percent: 15
+});
+$('#progressbar2').progress({
+  percent: 30
+});
+$('#progressbar3').progress({
+  percent: 45
+});
+
+$('#progressbar4').progress({
+  percent: 60
+});
+$('#progressbar5').progress({
+  percent: 75
+});
+$('#progressbar6').progress({
+  percent: 100
+});
+
