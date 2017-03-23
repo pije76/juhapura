@@ -74,10 +74,12 @@ class AboutMeProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = [
+
         'height',
         'weight',
         'body_type',
         'complexion',
+        'mother_tongue',
         'about_me',
         'looking_for'
         ]
@@ -135,7 +137,9 @@ class QualificationWorkProfileForm(forms.ModelForm):
 
 class ReligionProfileForm(forms.ModelForm):   
 
-    sect = forms.CharField()
+    cast = forms.CharField()
+
+    sub_cast = forms.CharField()
 
     hijab = forms.ChoiceField(choices = Profile.yes_no_list, 
         widget=forms.Select(attrs={'class': 'ui search dropdown'}))
@@ -146,7 +150,8 @@ class ReligionProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = [
-        'sect',
+        'cast',
+        'sub_cast',
         'hijab'
         ,'beard'
         ]

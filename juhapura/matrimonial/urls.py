@@ -60,4 +60,14 @@ urlpatterns = [
         view=views.UserProfileView.as_view(),
         name='profile'
     ),
+    url(
+        regex=r'^~delete_image/(?P<pk>\d+)/$', 
+        view= views.ProfileImageDeleteView.as_view(),
+        name='delete_profileimage',
+      ),
+        url(
+        regex=r'^(?P<username>[\w.@+-]+)/$',
+        view=views.UserProfileView.as_view(),
+        name='detail'
+    ),
 ]

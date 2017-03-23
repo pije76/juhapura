@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "matrimonial_base.html" %}
 {% load static %}
 
 {% block title %}
@@ -11,17 +11,99 @@
 {% block content %}
 <h1>{{profile.first_name}} {{profile.surname}}</h1>
 
+
 <div class="ui info message">
   <i class="close icon"></i>
   <div class="header">
     Thank you, we have now your profile.
   </div>
   <ul class="list">
-    <li>We are just preparing this page visit us soon.</li>
+    <li>We are just preparing this page</li>
     <li>This service will be free for benefit for our community</li>
   </ul>
 </div>
 
+<div class="ui grid">
+  <div class="eight wide column">
+{% for image in profile_images %}
 
-<h1></h1>
+{% if forloop.first %}
+	<div class="column">
+	    <div class="ui segment ">
+	    	<img class="ui medium image" src="/media/{{image.profile_image}}" /> 
+	    </div>
+	</div>
+	<div class="ui segment">
+	<div class="ui tiny  images">
+{% else %}
+
+	<img class="ui image" src="/media/{{image.profile_image}}" />
+{% endif %}
+{%endfor%}
+</div>
+</div>
+</div>
+
+  <div class="eight wide column">
+
+Age: {{profile.dob|timesince}} <br/>
+
+Marital Status : {{martial_status}} <br/>
+
+Height: {{profile.height}} <br/>
+
+Weight:{{profile.weight}} <br/>
+
+Sect: {{profile.cast}}<br/>
+
+{%if profile.sub_cast %}
+	Sub sect: {{profile.sub_cast}}<br/>
+{% endif %}
+
+
+Mother Tongue: {{mother_tongue}} <br/>
+
+
+Hijab: {{profile.hijab}} <br/>
+
+Beard: {{profile.beard}}
+
+<div class="ui piled segment">
+  <h4 class="ui header">About me</h4>	
+  <p>{{profile.about_me}}</p>
+
+ 
+</div>
+
+<div class="ui piled segment">
+  <h4 class="ui header">Looking for</h4>
+  <p>{{profile.looking_for}}</p>
+ 
+</div>
+</div>
+<div class="ui grid">
+
+ <div class="eight wide column">
+	<h3 class="ui divider header">Professional Summary</h3>
+
+	Qualification: {{profile.qualification}} <br/>
+	Summary: {{profile.qualification_summary}} <br/>
+
+	Occupation: {{profile.occupation}} <br/>
+	Summary: {{profile.occupation_summary}} <br/>
+	Income: {{profile.income}}
+</div>
+
+ <div class="eight wide column">
+	<h3 class="ui divider header">Family Summary</h3>
+
+	Father name: {{profile.father_name}} <br/>
+	Mother name: {{profile.mother_name}} <br/>
+
+	Family summary: {{profile.family_summary}} <br/>
+	
+
+</div>
+</div>
+
 {% endblock content %}

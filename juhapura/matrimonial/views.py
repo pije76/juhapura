@@ -2,7 +2,7 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.core.urlresolvers import reverse
-from django.views.generic import DetailView, ListView, RedirectView, UpdateView, TemplateView, FormView, CreateView
+from django.views.generic import DetailView, ListView, RedirectView, UpdateView, TemplateView, FormView, CreateView, DeleteView
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -63,6 +63,10 @@ class ProfileActivateView(LoginRequiredMixin,CreateView):
         # Only get the User record for the user making the request
         return Profile.objects.filter(user=self.request.user.id)
 
+class ProfileImageDeleteView(LoginRequiredMixin, DeleteView):
+     model = ProfileImage
+     success_url = '/matrimonial/~imageupload/'
+
 class ProfileImageUploadView(LoginRequiredMixin, FormView):
     template_name = 'matrimonial/upload_profile.html'
     form_class = ProfileImageUploadForm
@@ -70,6 +74,13 @@ class ProfileImageUploadView(LoginRequiredMixin, FormView):
 
     model = ProfileImage
    
+
+    def get_context_data(self, **kwargs):
+        profile = Profile.objects.get(user_id=self.request.user.id)
+        context = super(ProfileImageUploadView, self).get_context_data(**kwargs)
+        context['profile_images'] = ProfileImage.objects.filter(profile=profile)
+        return context
+
 
     def form_valid(self, form):
        
@@ -92,7 +103,7 @@ class ProfileImageUploadView(LoginRequiredMixin, FormView):
         return super(ProfileImageUploadView, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse('matrimonial:profile')
+        return reverse('matrimonial:image_upload')
 
     def get_object(self):
         # Only get the User record for the user making the request
@@ -100,23 +111,7 @@ class ProfileImageUploadView(LoginRequiredMixin, FormView):
         profile = Profile.objects.get(user=user)
         return ProfileImage.objects.get(profile=profile)
 
-# class BasicProfileUpdateView(LoginRequiredMixin, UpdateView):
-
-    # fields = ['firstname', 'surname', 'location', 'dob' ,'gender']
-
-    # # we already imported User in the view code above, remember?
-    # model = Profile
-
-    # # send the user back to their own page after a successful update
-    # def get_success_url(self):
-    #     return reverse('users:detail',
-    #                    kwargs={'username': self.request.user.username})
-
-    # def get_object(self):
-    #     # Only get the User record for the user making the request
-    #     return User.objects.get(username=self.request.user.username)
-
-class MatrimonialHomePageView(LoginRequiredMixin,TemplateView):
+class MatrimonialHomePageView(TemplateView):
     model = Profile
     # These next two lines tell the view to index lookups by username
     template_name = 'matrimonial/index.html'
@@ -214,6 +209,8 @@ class UserProfileView(LoginRequiredMixin, TemplateView):
         context = super(UserProfileView, self).get_context_data(**kwargs)
         context["profile"] = Profile.objects.get(user= self.request.user.id)
         context["profile_images"] = ProfileImage.objects.filter(profile= context["profile"])
+        context["martial_status"] = dict(Profile.marital_status_list).get(context["profile"].marital_status)
+        context["mother_tongue"] = dict(Profile.mother_tongue_list).get(context["profile"].mother_tongue)
         return context
 
 

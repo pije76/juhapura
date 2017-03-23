@@ -6,11 +6,6 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    # url(
-    #     regex=r'^$',
-    #     view=views.MatrimonialHomePageView.as_view(),
-    #     name='index'
-    # ),
     url(
         regex=r'^~redirect/$',
         view=views.UserRedirectView.as_view(),
@@ -32,10 +27,4 @@ urlpatterns = [
         view=views.UserBasicProfileUpdateView.as_view(),
         name='profile_update'
     ),
-
-    # url(
-    #     regex=r'^~about/$',
-    #     view=views.UserAboutInformationForm.as_view(),
-    #     name='personal_update'
-    # ),
 ]

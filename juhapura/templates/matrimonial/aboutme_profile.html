@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "matrimonial_base.html" %}
 {% load static %}
 
 {% block title %}User: {{ object.name }}{% endblock %}
@@ -48,6 +48,12 @@
           {{ form.complexion }}
       </div>
     </div>
+
+    <div class="field">
+          {{ form.mother_tonge.errors }}
+          <label for="{{ form.mother_tonge.id_for_label }}">Mother Tonge</label>
+          {{ form.mother_tonge }}
+      </div>
 
     <div class="field">
         {{ form.about_me.errors }}

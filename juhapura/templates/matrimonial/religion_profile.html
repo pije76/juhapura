@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "matrimonial_base.html" %}
 {% load static %}
 
 {% block title %}User: {{ object.name }}{% endblock %}
@@ -28,9 +28,15 @@
 
 <div class="two fields">
   <div class="field">
-          {{ form.sect.errors }}
-          <label for="{{ form.sect.id_for_label }}">Sect</label>
-          {{ form.sect }}
+          {{ form.cast.errors }}
+          <label for="{{ form.cast.id_for_label }}">Sect</label>
+          {{ form.cast }}
+      </div>
+
+    <div class="field">
+          {{ form.sub_cast.errors }}
+          <label for="{{ form.sub_cast.id_for_label }}">Sub sect</label>
+          {{ form.sub_cast }}
       </div>
 </div>
 

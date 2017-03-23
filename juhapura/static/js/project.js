@@ -40,6 +40,8 @@ $("#id_city").addClass("ui search dropdown");
 $("#id_country").addClass("ui search dropdown");
 $("#id_body_type").addClass("ui search dropdown");
 $("#id_complexion").addClass("ui search dropdown");
+$("#id_mother_tonge").addClass("ui search dropdown");
+
 
 
 $('#progressbar1').progress({

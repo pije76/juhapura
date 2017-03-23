@@ -330,6 +330,26 @@ class Profile(models.Model):
         (3,'Wheatish Brown'),
         ]
 
+    mother_tongue_list = [
+        (1,'Hindi'),
+        (2,'Bengali'),
+        (3,'Telugu'),
+        (4,'Marathi'),
+        (5,'Tamil'),
+        (6,'Urdu'),
+        (7,'Gujarati'),
+        (8,'Kannada'),
+        (9,'Malayalam'),
+        (10,'Odia'),
+        (11,'Punjabi'),
+        (12,'Assamese'),
+        (13,'Maithili'),
+        (14,'Bhili/Bhilodi'),
+        (15,'Santali'),
+        (16,'Kashmiri'),
+        (17,'Nepali'),
+        (99,'Other')
+        ]
 
     yes_no_list = [
 	    (1,'Yes'),
@@ -391,6 +411,9 @@ class Profile(models.Model):
     complexion = models.IntegerField(choices=complexion_list, 
         null=True)
 
+    mother_tongue = models.IntegerField(choices=mother_tongue_list, 
+        null=True)
+
     about_me = models.TextField(null=True)
 
     looking_for = models.TextField(null=True)
@@ -426,7 +449,11 @@ class Profile(models.Model):
         null=True
         )
 
-    sect = models.CharField(_('Sect'), 
+    cast = models.CharField(_('Cast'), 
+        blank = True, 
+        max_length=255)
+
+    sub_cast = models.CharField(_('Sub cast'), 
         blank = True, 
         max_length=255)
 
