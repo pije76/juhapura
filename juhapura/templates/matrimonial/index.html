@@ -18,6 +18,8 @@
 
 <div class="ui">
 
+<h1>Juhapura Matrimonial is the "Private & FREE" Muslim Matrimonial website.</h1>
+
 {% if not profile %}
 <form action="{% url 'matrimonial:activate' %}" method="POST">
   <button type="submit" class="ui basic button right floated">
@@ -62,15 +64,17 @@
 <h2> Privacy Protection</h2>
 
 Our sole purpose is to help you find your other half, comfortably and privately. If you are serious about getting married and want to do it discretely, then you have come to the right place. Our ironclad Five-Point Privacy Protection is one of the main reasons why Muslims will be safe here to find their other half. How do we keep the process of finding your other half as private and safe as possible?
-<ul><li>
-First, we filter out the players. Free browsing is not an option here at Juhapura matrimonial. That’s why we only allow registered members to enter our secure site</li>
-<li>
-Second, this is a No Fake Profile Zone. We block the hide-and-seekers with strict quality control that prevents fake profiles. All members complete their own real profiles before being able to view other profiles.</li>
-<li>
-Third, we give you strict control over who qualifies to see your profile. Set your deal breaker questions to control profile access, block unwanted attention, and stay in control.</li>
-<li>
-Fourth, we don’t use your profile to advertise on the internet, so your picture and profile don’t show up in Google search! This kind of privacy is important to our members and parents (walis) alike.
-</li><li>
+<div class="ui bulleted list">
+  <div class="item">
+First, we filter out the players. Free browsing is not an option here at Juhapura matrimonial. That’s why we only allow registered members to enter our secure site</div>
+  <div class="item">
+Second, this is a No Fake Profile Zone. We block the hide-and-seekers with strict quality control that prevents fake profiles. All members complete their own real profiles before being able to view other profiles.</div>
+  <div class="item">
+Third, we give you strict control over who qualifies to see your profile. Set your deal breaker questions to control profile access, block unwanted attention, and stay in control.</div>
+  <div class="item">
+Fourth, we don’t use your profile to advertise on the internet, so your picture and profile don’t show up in Google search! This kind of privacy is important to our members and parents (walis) alike.</div>
+  <div class="item">
 Last, Matrimonial section has a No Ad policy. We allow no spam, pop-ups, banner ads, or even text ads. We’re here to connect real people with real matches, not to promote dodgy affiliate products.
-</li></ul>
+</div>
+</div>
 {% endblock content %}
