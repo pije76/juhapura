@@ -63,18 +63,19 @@ class BasicProfileUpdateForm(forms.ModelForm):
 
 class AboutMeProfileForm(forms.ModelForm):   
 
-    height = forms.CharField(widget=forms.TextInput(attrs={'placehoder':'ex 5ft 3inch'}));
+    about_me = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Briefy describe about yourself', 'rows':'10'}))
 
-    weight = forms.CharField(widget=forms.TextInput(attrs={'placehoder':'in Kg'}));
+    looking_for = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Please brief regarding your expected partner quality', 'rows':'10'}))
 
-    about_me = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Briefy describe about yourself', 'rows':'10'}));    
+    complexion = forms.ChoiceField(choices = Profile.complexion_list, 
+        widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
-    looking_for = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Please brief regarding your expected partner quality', 'rows':'10'}));    
+    body_type = forms.ChoiceField(choices = Profile.body_type_list, 
+        widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
     class Meta:
         model = Profile
         fields = [
-
         'height',
         'weight',
         'body_type',
@@ -83,23 +84,16 @@ class AboutMeProfileForm(forms.ModelForm):
         'about_me',
         'looking_for'
         ]
+      
 
     def __init__(self, *args, **kwargs):
 
-        if kwargs.get('instance'):
-            # name = kwargs['instance'].name
-            widgets = {
-            # 'dob': forms.DateInput(attrs={'class':'myDateClass', 
-            #                                 'placeholder':'Select a date'})
-            'about_me':forms.Textarea(attrs={'placeholder':'About me', 'rows':'10'}),
-            'looking_for':forms.Textarea(attrs={'placeholder':'What I Am Looking For?', 'rows':'10'})
-            }
-            # self.fields['about_me'].widget.attrs = { 'placeholder':'About me', 'rows':'10'}
-            # self.fields['looking_for'].widget.attrs = { 'placeholder':'What I Am Looking For?', 'rows':'10'}
+            super(AboutMeProfileForm, self).__init__(*args, **kwargs)
+            self.fields['height'].widget.attrs['placeholder'] = '5ft 10inch'
+            self.fields['weight'].widget.attrs['placeholder'] = '65 kgs'
 
 
-        return super(AboutMeProfileForm, self).__init__(*args, **kwargs)
-
+      
 class QualificationWorkProfileForm(forms.ModelForm):   
 
     qualification = forms.ChoiceField(choices = Profile.qualification_list, 
