@@ -2,62 +2,48 @@
 {% load static %}
 
 {% block title %}User: {{object.user}}{% endblock %}
-
 {% block content %}
 
 <h1 class="ui dividing header">Upload profile picture</h1>
-
   <div class="ui teal progress" id="progressbar6">
     <div class="bar"></div>
     <div class="label"></div>
   </div>
 
-
-
-<div class="ui attached message">
-  <div class="header">
-    Upload profile picture
+  <div class="ui attached message">
+    <div class="header">
+      Upload profile picture
+    </div>
+    <p>Three profile pictures allowed to upload</p>
   </div>
-  <p>Three profile pictures allowed to upload</p>
-</div>
 
-<div class="ui bottom attached button"></div>
 <div class="ui three column padded equal height grid">
-{% for image in profile_images	 %}
-<div class="column ">
+
+  {% for image in profile_images %}
+
+  <div class="column ">
+
     <div class="ui segment stretched">
-    	<img class="ui medium  image" src="/media/{{image.profile_image}}" /> 
-      	
+    	<img class="ui medium  image" src="/media/{{image.profile_image}}" />       	
     </div>
 
-<form method="post" action="{% url 'matrimonial:delete_profileimage' pk=image.pk %}">
- 	
- 	 {% csrf_token %}
-
-  	 <input type="submit" class="ui red button"  value="Delete"/>
-  	 
-</form>
+    <form method="post" action="{% url 'matrimonial:delete_profileimage' pk=image.pk %}">
+   	   {% csrf_token %}
+       <input type="submit" class="ui red button"  value="Delete"/>
+    </form>
  
   </div>
-    
 
-
-{% endfor %}
-
+  {% endfor %}
 
 </div>
 
-
-
 <form action="" method="post" enctype="multipart/form-data">
-<div class="two fields">
-    {% csrf_token %}
-    {{ form.as_p }}
-   
-    <a href="{%url 'matrimonial:profile'%}"><button class="ui primary button right floated">Submit</button></a>
-     <input  type="submit" class="ui primary button right floated" value="Save" />
-    </div>
+  <div class="two fields">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input  type="submit" class="ui primary button right floated" value="Save" />
+  </div>
 </form>
-
-
+<a href="{%url 'matrimonial:profile'%}"><button class="ui primary button right floated">Submit</button></a>
 {% endblock content %}

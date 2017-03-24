@@ -14,6 +14,15 @@
 <!-- Action buttons -->
 
 
+
+<div class="ui success message">
+  <div class="header">
+    Your privacy is our top priority.
+  </div>
+  <p>Contact number and adress information is Office use only. This information will not be visible to other users unless you permit.</p>
+</div>
+
+
  <form action="{{ action }}" method="POST" class="form-horizontal ui form">
   {% csrf_token %}
 
@@ -60,7 +69,7 @@
 
   <div class="three fields fieldWrapper">
 
-
+ 
    <div class="field">
       {{ form.address_line1.errors }}
       <label for="{{ form.address_line1.id_for_label }}">Address line 1</label>
@@ -97,7 +106,22 @@
       {{ form.country }}
   </div>
 </div>
-<div class="three fields fieldWrapper">
+
+<div class="two fields fieldWrapper">
+<div class="field">
+      {{ form.contact_no.errors }}
+      <label for="{{ form.contact_no.id_for_label }}">Contact Number</label>
+      {{ form.contact_no }}
+  </div>
+  <div class="field">
+      {{ form.mobile_no.errors }}
+      <label for="{{ form.mobile_no.id_for_label }}">Mobile Number</label>
+      {{ form.mobile_no }}
+  </div>
+</div>
+
+
+<div class="two fields fieldWrapper">
 <div class="field">
       {{ form.reason_registration.errors }}
       <label for="{{ form.reason_registration.id_for_label }}">Reason for registration?</label>

@@ -65,12 +65,12 @@ class ProfileActivateView(LoginRequiredMixin,CreateView):
 
 class ProfileImageDeleteView(LoginRequiredMixin, DeleteView):
      model = ProfileImage
-     success_url = '/matrimonial/~imageupload/'
+     success_url = '/matrimonial/image_upload/'
 
 class ProfileImageUploadView(LoginRequiredMixin, FormView):
     template_name = 'matrimonial/upload_profile.html'
     form_class = ProfileImageUploadForm
-    success_url = 'matrimonial/~imageupload/'
+    success_url = 'matrimonial/image_upload/'
 
     model = ProfileImage
    
@@ -211,6 +211,9 @@ class UserProfileView(LoginRequiredMixin, TemplateView):
         context["profile_images"] = ProfileImage.objects.filter(profile= context["profile"])
         context["martial_status"] = dict(Profile.marital_status_list).get(context["profile"].marital_status)
         context["mother_tongue"] = dict(Profile.mother_tongue_list).get(context["profile"].mother_tongue)
+        context["qualification"] = dict(Profile.qualification_list).get(context["profile"].qualification)
+        context["occupation"] = dict(Profile.occupation_list).get(context["profile"].occupation)
+        context["income"] = dict(Profile.income_list).get(context["profile"].income)
         return context
 
 

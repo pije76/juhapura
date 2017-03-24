@@ -31,11 +31,94 @@ class Profile(models.Model):
 	
     gender_list = [('M','Male'), ('F','Female')]
 
-    marital_status_list = [ (0, 'Unmarried'),
+    marital_status_list = [ (0, 'Never married'),
         (1, 'Divorcee'),
         (2, 'Seperated'),
-        (3, 'Widow/Widower')
+        (3, 'Widow/Widower'),
+        (4, 'Anulled')
         ]
+    height_list = [(0,"Select Option"),
+            ("1.37","1.37m (4' 6\")"),
+            ("1.38","1.38m"),
+            ("1.39","1.39m"),
+            ("1.4","1.40m (4' 7\")"),
+            ("1.41","1.41m"),
+            ("1.42","1.42m (4' 8\")"),
+            ("1.43","1.43m"),
+            ("1.44","1.44m"),
+            ("1.45","1.45m (4' 9\")"),
+            ("1.46","1.46m"),
+            ("1.47","1.47m (4' 10\")"),
+            ("1.48","1.48m"),
+            ("1.49","1.49m"),
+            ("1.5","1.50m (4' 11\")"),
+            ("1.51","1.51m"),
+            ("1.52","1.52m (5' 0\")"),
+            ("1.53","1.53m"),
+            ("1.54","1.54m"),
+            ("1.55","1.55m (5' 1\")"),
+            ("1.56","1.56m"),
+            ("1.57","1.57m (5' 2\")"),
+            ("1.58","1.58m"),
+            ("1.59","1.59m"),
+            ("1.6","1.60m (5' 3\")"),
+            ("1.61","1.61m"),
+            ("1.62","1.62m"),
+            ("1.63","1.63m (5' 4\")"),
+            ("1.64","1.64m"),
+            ("1.65","1.65m (5' 5\")"),
+            ("1.66","1.66m"),
+            ("1.67","1.67m"),
+            ("1.68","1.68m (5' 6\")"),
+            ("1.69","1.69m"),
+            ("1.7","1.70m (5' 7\")"),
+            ("1.71","1.71m"),
+            ("1.72","1.72m"),
+            ("1.73","1.73m (5' 8\")"),
+            ("1.74","1.74m"),
+            ("1.75","1.75m (5' 9\")"),
+            ("1.76","1.76m"),
+            ("1.77","1.77m"),
+            ("1.78","1.78m (5' 10\")"),
+            ("1.79","1.79m"),
+            ("1.8","1.80m (5' 11\")"),
+            ("1.81","1.81m"),
+            ("1.82","1.82m"),
+            ("1.83","1.83m (6' 0\")"),
+            ("1.84","1.84m"),
+            ("1.85","1.85m (6' 1\")"),
+            ("1.86","1.86m"),
+            ("1.87","1.87m"),
+            ("1.88","1.88m (6' 2\")"),
+            ("1.89","1.89m"),
+            ("1.9","1.90m"),
+            ("1.91","1.91m (6' 3\")"),
+            ("1.92","1.92m"),
+            ("1.93","1.93m (6' 4\")"),
+            ("1.94","1.94m"),
+            ("1.95","1.95m"),
+            ("1.96","1.96m (6' 5\")"),
+            ("1.97","1.97m"),
+            ("1.98","1.98m (6' 6\")"),
+            ("1.99","1.99m"),
+            ("2","2.00m"),
+            ("2.01","2.01m (6' 7\")"),
+            ("2.02","2.02m"),
+            ("2.03","2.03m (6' 8\")"),
+            ("2.04","2.04m"),
+            ("2.05","2.05m"),
+            ("2.06","2.06m (6' 9\")"),
+            ("2.07","2.07m"),
+            ("2.08","2.08m (6' 10\")"),
+            ("2.09","2.09m"),
+            ("2.1","2.10m"),
+            ("2.11","2.11m (6' 11\")"),
+            ("2.12","2.12m"),
+            ("2.13","2.13m (7' 0\")"),
+            ("2.14","2.14m"),
+            ("2.15","2.15m"),
+            ("2.16","2.16m (7' 1\")"),
+            ]
 
     reason_registration_list = [
         (1, 'I\'m registring to find myself a partner'),
@@ -356,6 +439,8 @@ class Profile(models.Model):
 	    (0,'No')
 	    ]
 
+    weight_list = [(0,'Select Option')] +[(i,i) for i in range(35, 121)]
+
     user = models.ForeignKey(User)
 
     first_name = models.CharField(_('Name of User'), 
@@ -372,8 +457,7 @@ class Profile(models.Model):
     gender = models.CharField(choices=gender_list, default = 'M', null = True, max_length=1)
 
     location = models.CharField(_('Location'), 
-        blank=True, 
-        max_length=255)
+        blank=True, max_length=255)
 
     marital_status = models.IntegerField(choices=marital_status_list, 
         null = True)
@@ -397,13 +481,11 @@ class Profile(models.Model):
         db_constraint=False, on_delete=models.CASCADE, 
         default = "India")
 
-    height = models.CharField(_('Height'), 
-        blank = True, 
-        max_length=255)
+    height = models.CharField(choices=height_list,
+        blank = True, null=True, max_length=10)
 
-    weight = models.CharField(_('Weight'), 
-        blank = True, 
-        max_length=255)
+    weight = models.IntegerField(choices=weight_list,
+        blank = True, null=True)
 
     body_type = models.IntegerField(choices=body_type_list, 
         null=True)
@@ -466,7 +548,11 @@ class Profile(models.Model):
         blank=True, 
         max_length=255)
 
-    parent_contact_no = models.CharField(_('Contact number of parent'), 
+    contact_no = models.CharField( 
+        blank=True, 
+        max_length=15)
+
+    mobile_no = models.CharField(
         blank=True, 
         max_length=15)
 

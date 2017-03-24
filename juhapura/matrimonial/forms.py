@@ -25,6 +25,13 @@ class BasicProfileUpdateForm(forms.ModelForm):
     marital_status = forms.ChoiceField(choices = Profile.marital_status_list, 
     	widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
+
+    contact_no = forms.IntegerField(widget=forms.TextInput(
+            attrs={'placeholder': 'Please provide contact number where one can get in touch with proposal'}
+            ))
+
+    mobile_no = forms.IntegerField(widget=forms.TextInput())
+
     # city = forms.ChoiceField(forms.Select(attrs={'class': 'ui search dropdown'}))
     reason_registration = forms.ChoiceField(choices = Profile.reason_registration_list,
     	widget=forms.Select(attrs={'class': 'ui search dropdown'}))
@@ -65,12 +72,21 @@ class AboutMeProfileForm(forms.ModelForm):
 
     about_me = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Briefy describe about yourself', 'rows':'10'}))
 
-    looking_for = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Please brief regarding your expected partner quality', 'rows':'10'}))
+    looking_for = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Please brief your expectation regarding partner', 'rows':'10'}))
 
     complexion = forms.ChoiceField(choices = Profile.complexion_list, 
         widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
     body_type = forms.ChoiceField(choices = Profile.body_type_list, 
+        widget=forms.Select(attrs={'class': 'ui search dropdown'}))
+
+    mother_tongue = forms.ChoiceField(choices = Profile.mother_tongue_list, 
+        widget=forms.Select(attrs={'class': 'ui search dropdown'}))
+
+    height = forms.ChoiceField(choices = Profile.height_list,
+        widget=forms.Select(attrs={'class': 'ui search dropdown'}))
+
+    weight = forms.ChoiceField(choices = Profile.weight_list,
         widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
     class Meta:
@@ -89,10 +105,8 @@ class AboutMeProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
 
             super(AboutMeProfileForm, self).__init__(*args, **kwargs)
-            self.fields['height'].widget.attrs['placeholder'] = '5ft 10inch'
-            self.fields['weight'].widget.attrs['placeholder'] = '65 kgs'
-
-
+            # self.fields['height'].widget.attrs['placeholder'] = '5ft 10inch'
+            # self.fields['weight'].widget.attrs['placeholder'] = '65 kgs'
       
 class QualificationWorkProfileForm(forms.ModelForm):   
 
@@ -175,19 +189,20 @@ class ProfileImageUploadForm(forms.Form):
 
 class FamilyProfileForm(forms.ModelForm): 
     
-    father_name = forms.CharField()
+    father_name = forms.CharField(widget=forms.TextInput(
+            attrs={'placeholder': 'Father/Guardian Name'}
+            ))
 
-    mother_name = forms.CharField()
+    mother_name = forms.CharField(widget=forms.TextInput(
+            attrs={'placeholder': 'Mother/Sister Name'}
+            ))
 
-    parent_contact_no = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'One of your parent contact detail'}))
-
-    family_summary = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Please briefly describe about your sibling information and family history'}))
+    family_summary = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Briefly describe about your sibling information and family history'}))
 
     class Meta:
         model = Profile
         fields = [
         'father_name'
         ,'mother_name'
-        ,'parent_contact_no'
         ,'family_summary'
         ]

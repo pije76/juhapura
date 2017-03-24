@@ -15,54 +15,54 @@ urlpatterns = [
    
 
     url(
-        regex=r'^~profile/$',
+        regex=r'^basic_profile/$',
         view=views.BasicProfileUpdateView.as_view(),
         name='profile_update'
     ),
 
     url(
-        regex=r'^~about/$',
+        regex=r'^about_me/$',
         view=views.AboutMeProfileView.as_view(),
         name='personal_update'
     ),
 
     url(
-        regex=r'^~imageupload/$',
+        regex=r'^image_upload/$',
         view=views.ProfileImageUploadView.as_view(),
         name='image_upload'
     ),
 
     url(
-        regex=r'^~qualification/$',
+        regex=r'^qualification_work/$',
         view=views.QualificationWorkProfileView.as_view(),
         name='qualification_update'
     ),
 
     url(
-        regex=r'^~religion/$',
+        regex=r'^religion/$',
         view=views.ReligionProfileView.as_view(),
         name='religion_update'
     ),
 
      url(
-        regex=r'^~family/$',
+        regex=r'^family/$',
         view=views.FamilyProfileView.as_view(),
         name='family_update'
     ),
 
       url(
-        regex=r'^~activate/$',
+        regex=r'^activate/$',
         view=views.ProfileActivateView.as_view(),
         name='activate'
     ),
 
       url(
-        regex=r'^~user_profile/$',
+        regex=r'^profile/$',
         view=views.UserProfileView.as_view(),
         name='profile'
     ),
     url(
-        regex=r'^~delete_image/(?P<pk>\d+)/$', 
+        regex=r'^delete_image/(?P<pk>\d+)/$', 
         view= views.ProfileImageDeleteView.as_view(),
         name='delete_profileimage',
       ),
