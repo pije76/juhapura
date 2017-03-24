@@ -33,15 +33,17 @@
 	    	<img class="ui medium image" src="{{ MEDIA_URL }}{{image.profile_image}}" /> 
 	    </div>
 	</div>
+	
+{% elif forloop.counter > 1 %}
 	<div class="ui segment">
-	<div class="ui tiny  images">
-{% else %}
-
-	<img class="ui image" src="{{ MEDIA_URL }}{{image.profile_image}}" />
+		<div class="ui tiny  images">
+			<img class="ui image" src="{{ MEDIA_URL }}{{image.profile_image}}" />
+		</div>
+	</div>
+	
 {% endif %}
 {%endfor%}
-</div>
-</div>
+
 </div>
 
   <div class="eight wide column">
