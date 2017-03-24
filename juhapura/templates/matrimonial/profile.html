@@ -30,14 +30,14 @@
 {% if forloop.first %}
 	<div class="column">
 	    <div class="ui segment ">
-	    	<img class="ui medium image" src="/media/{{image.profile_image}}" /> 
+	    	<img class="ui medium image" src="{{ MEDIA_URL }}{{image.profile_image}}" /> 
 	    </div>
 	</div>
 	<div class="ui segment">
 	<div class="ui tiny  images">
 {% else %}
 
-	<img class="ui image" src="/media/{{image.profile_image}}" />
+	<img class="ui image" src="{{ MEDIA_URL }}{{image.profile_image}}" />
 {% endif %}
 {%endfor%}
 </div>
