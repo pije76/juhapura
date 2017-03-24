@@ -22,14 +22,14 @@
 
 {% if not profile %}
 <form action="{% url 'matrimonial:activate' %}" method="POST">
-  <button type="submit" class="ui basic button right floated">
+  <button type="submit" class="ui green button right floated">
     <i class="icon user"></i>
     Activate profile
   </button>
   </form>
 {% else %}
 <a href='{% url 'matrimonial:profile_update'  %}'>
-<button type="submit" class="ui basic button right floated">
+<button type="submit" class="ui green button right floated">
     <i class="icon user"></i>
     Update profile
   </button>

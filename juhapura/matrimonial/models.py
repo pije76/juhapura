@@ -553,7 +553,7 @@ class Profile(models.Model):
         max_length=15)
 
     mobile_no = models.CharField(
-        blank=True, 
+        blank=True, null=True,
         max_length=15)
 
     family_summary = models.TextField(null=True)
