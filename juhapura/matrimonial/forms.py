@@ -17,20 +17,18 @@ class BasicProfileUpdateForm(forms.ModelForm):
 
     dob = forms.DateField()
 
-    gender = forms.ChoiceField(choices=gender_list, 
+    gender = forms.ChoiceField(choices=gender_list,
     	widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
     location = forms.CharField()
 
-    marital_status = forms.ChoiceField(choices = Profile.marital_status_list, 
+    marital_status = forms.ChoiceField(choices = Profile.marital_status_list,
     	widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
 
     contact_no = forms.IntegerField(widget=forms.TextInput(
             attrs={'placeholder': 'Please provide contact number where one can get in touch with proposal'}
             ))
-
-    mobile_no = forms.IntegerField(widget=forms.TextInput())
 
     # city = forms.ChoiceField(forms.Select(attrs={'class': 'ui search dropdown'}))
     reason_registration = forms.ChoiceField(choices = Profile.reason_registration_list,
@@ -48,7 +46,7 @@ class BasicProfileUpdateForm(forms.ModelForm):
         ,'marital_status'
         ,'address_line1'
         ,'address_line2'
-        ,'address_line3' 
+        ,'address_line3'
         ,'city'
         ,'country'
         ,'reason_registration'
@@ -61,26 +59,26 @@ class BasicProfileUpdateForm(forms.ModelForm):
             # kwargs.setdefault('initial', {})['confirm_email'] = email
             # dob'].widget.format = '%d/%m/%Y'
             widgets = {
-            # 'dob': forms.DateInput(attrs={'class':'myDateClass', 
+            # 'dob': forms.DateInput(attrs={'class':'myDateClass',
             #                                 'placeholder':'Select a date'})
             'city':forms.Select(attrs={'class':'ui search dropdown'})
         	}
             # self.fields['city'].widget = ListTextWidget(class='test')
         return super(BasicProfileUpdateForm, self).__init__(*args, **kwargs)
 
-class AboutMeProfileForm(forms.ModelForm):   
+class AboutMeProfileForm(forms.ModelForm):
 
     about_me = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Briefy describe about yourself', 'rows':'10'}))
 
     looking_for = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Please brief your expectation regarding partner', 'rows':'10'}))
 
-    complexion = forms.ChoiceField(choices = Profile.complexion_list, 
+    complexion = forms.ChoiceField(choices = Profile.complexion_list,
         widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
-    body_type = forms.ChoiceField(choices = Profile.body_type_list, 
+    body_type = forms.ChoiceField(choices = Profile.body_type_list,
         widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
-    mother_tongue = forms.ChoiceField(choices = Profile.mother_tongue_list, 
+    mother_tongue = forms.ChoiceField(choices = Profile.mother_tongue_list,
         widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
     height = forms.ChoiceField(choices = Profile.height_list,
@@ -100,27 +98,27 @@ class AboutMeProfileForm(forms.ModelForm):
         'about_me',
         'looking_for'
         ]
-      
+
 
     def __init__(self, *args, **kwargs):
 
             super(AboutMeProfileForm, self).__init__(*args, **kwargs)
             # self.fields['height'].widget.attrs['placeholder'] = '5ft 10inch'
             # self.fields['weight'].widget.attrs['placeholder'] = '65 kgs'
-      
-class QualificationWorkProfileForm(forms.ModelForm):   
 
-    qualification = forms.ChoiceField(choices = Profile.qualification_list, 
+class QualificationWorkProfileForm(forms.ModelForm):
+
+    qualification = forms.ChoiceField(choices = Profile.qualification_list,
         widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
     qualification_summary = forms.CharField(widget=forms.Textarea)
 
-    occupation = forms.ChoiceField(choices = Profile.occupation_list, 
+    occupation = forms.ChoiceField(choices = Profile.occupation_list,
         widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
     occupation_summary = forms.CharField(widget=forms.Textarea)
 
-    income = forms.ChoiceField(choices = Profile.income_list, 
+    income = forms.ChoiceField(choices = Profile.income_list,
         widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
     class Meta:
@@ -143,16 +141,16 @@ class QualificationWorkProfileForm(forms.ModelForm):
 
     #     return super(QualificationWorkProfileForm, self).__init__(*args, **kwargs)
 
-class ReligionProfileForm(forms.ModelForm):   
+class ReligionProfileForm(forms.ModelForm):
 
     cast = forms.CharField()
 
     sub_cast = forms.CharField()
 
-    hijab = forms.ChoiceField(choices = Profile.yes_no_list, 
+    hijab = forms.ChoiceField(choices = Profile.yes_no_list,
         widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
-    beard = forms.ChoiceField(choices = Profile.yes_no_list, 
+    beard = forms.ChoiceField(choices = Profile.yes_no_list,
         widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
     class Meta:
@@ -168,7 +166,7 @@ class ReligionProfileForm(forms.ModelForm):
 
     #     if kwargs.get('instance'):
     #         name = kwargs['instance'].name
-          
+
     #     return super(UserReligionInformationForm, self).__init__(*args, **kwargs)
 
 class ProfileImageUploadForm(forms.Form):
@@ -179,16 +177,16 @@ class ProfileImageUploadForm(forms.Form):
         model = ProfileImage
 
     def __init__(self, *args, **kwargs):
-        
+
         if kwargs.get('instance'):
             # user = kwargs['instance'].user
-        
+
             instance = ProfileImage.objects.filter(user_id=self.request.user.id)
 
         return super(ProfileImageUploadForm, self).__init__(*args, **kwargs)
 
-class FamilyProfileForm(forms.ModelForm): 
-    
+class FamilyProfileForm(forms.ModelForm):
+
     father_name = forms.CharField(widget=forms.TextInput(
             attrs={'placeholder': 'Father/Guardian Name'}
             ))

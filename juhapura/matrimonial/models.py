@@ -27,8 +27,8 @@ class Cities(models.Model):
         return ' - '.join([self.city_name, self.city_state])
 
 
-class Profile(models.Model):	
-	
+class Profile(models.Model):
+
     gender_list = [('M','Male'), ('F','Female')]
 
     marital_status_list = [ (0, 'Never married'),
@@ -443,42 +443,42 @@ class Profile(models.Model):
 
     user = models.ForeignKey(User)
 
-    first_name = models.CharField(_('Name of User'), 
-        blank=True, 
+    first_name = models.CharField(_('Name of User'),
+        blank=True,
         max_length=255)
 
-    surname = models.CharField(_('Name of User'), 
-        blank=True, 
+    surname = models.CharField(_('Name of User'),
+        blank=True,
         max_length=255)
 
-    dob = models.DateField(_('Date of Birth'), 
+    dob = models.DateField(_('Date of Birth'),
         null=True)
 
     gender = models.CharField(choices=gender_list, default = 'M', null = True, max_length=1)
 
-    location = models.CharField(_('Location'), 
+    location = models.CharField(_('Location'),
         blank=True, max_length=255)
 
-    marital_status = models.IntegerField(choices=marital_status_list, 
+    marital_status = models.IntegerField(choices=marital_status_list,
         null = True)
 
-    address_line1 = models.CharField(_('Address Line 1'), 
-        blank = True, 
+    address_line1 = models.CharField(_('Address Line 1'),
+        blank = True,
         max_length=255)
 
-    address_line2 = models.CharField(_('Address Line 2'), 
-        blank = True, 
+    address_line2 = models.CharField(_('Address Line 2'),
+        blank = True,
         max_length=255)
 
-    address_line3 = models.CharField(_('Address Line 3'), 
-        blank = True, 
+    address_line3 = models.CharField(_('Address Line 3'),
+        blank = True,
         max_length=255)
 
-    city = models.ForeignKey(Cities, null=True, 
+    city = models.ForeignKey(Cities, null=True,
         db_constraint=False, on_delete=models.CASCADE)
 
-    country = models.ForeignKey(Country,to_field="name", 
-        db_constraint=False, on_delete=models.CASCADE, 
+    country = models.ForeignKey(Country,to_field="name",
+        db_constraint=False, on_delete=models.CASCADE,
         default = "India")
 
     height = models.CharField(choices=height_list,
@@ -487,78 +487,75 @@ class Profile(models.Model):
     weight = models.IntegerField(choices=weight_list,
         blank = True, null=True)
 
-    body_type = models.IntegerField(choices=body_type_list, 
+    body_type = models.IntegerField(choices=body_type_list,
         null=True)
 
-    complexion = models.IntegerField(choices=complexion_list, 
+    complexion = models.IntegerField(choices=complexion_list,
         null=True)
 
-    mother_tongue = models.IntegerField(choices=mother_tongue_list, 
+    mother_tongue = models.IntegerField(choices=mother_tongue_list,
         null=True)
 
     about_me = models.TextField(null=True)
 
     looking_for = models.TextField(null=True)
 
-    reason_registration = models.IntegerField(choices=reason_registration_list, 
+    reason_registration = models.IntegerField(choices=reason_registration_list,
         null=True
         )
 
     #qualification & work
 
-    qualification = models.IntegerField(choices=qualification_list, 
+    qualification = models.IntegerField(choices=qualification_list,
         null=True
         )
 
     qualification_summary = models.TextField(null=True)
 
-    occupation = models.IntegerField(choices=occupation_list, 
+    occupation = models.IntegerField(choices=occupation_list,
         null=True
         )
 
     occupation_summary = models.TextField(null=True)
 
-    income = models.IntegerField(choices=income_list, 
+    income = models.IntegerField(choices=income_list,
         null=True
         )
 
     #religion
-    hijab = models.IntegerField(choices=yes_no_list, 
+    hijab = models.IntegerField(choices=yes_no_list,
         null=True
         )
 
-    beard  = models.IntegerField(choices=yes_no_list, 
+    beard  = models.IntegerField(choices=yes_no_list,
         null=True
         )
 
-    cast = models.CharField(_('Cast'), 
-        blank = True, 
+    cast = models.CharField(_('Cast'),
+        blank = True,
         max_length=255)
 
-    sub_cast = models.CharField(_('Sub cast'), 
-        blank = True, 
+    sub_cast = models.CharField(_('Sub cast'),
+        blank = True,
         max_length=255)
 
     # Family background
-    father_name = models.CharField(_('Father name'), 
-        blank=True, 
+    father_name = models.CharField(_('Father name'),
+        blank=True,
         max_length=255)
 
-    mother_name = models.CharField(_('Father name'), 
-        blank=True, 
+    mother_name = models.CharField(_('Father name'),
+        blank=True,
         max_length=255)
 
-    contact_no = models.CharField( 
-        blank=True, 
+    contact_no = models.CharField(
+        blank=True,
         max_length=15)
 
-    mobile_no = models.CharField(
-        blank=True, null=True,
-        max_length=15)
 
     family_summary = models.TextField(null=True)
 
 
 class ProfileImage(models.Model):
     profile_image = models.FileField(upload_to='profile_images', blank=True, null=True)
-    profile = models.ForeignKey(Profile)  
+    profile = models.ForeignKey(Profile)
