@@ -107,29 +107,23 @@
   </div>
 </div>
 
-<div class="two fields fieldWrapper">
 <div class="field">
       {{ form.contact_no.errors }}
       <label for="{{ form.contact_no.id_for_label }}">Contact Number</label>
       {{ form.contact_no }}
-  </div>
-  
 </div>
-
 
 <div class="two fields fieldWrapper">
-<div class="field">
-      {{ form.reason_registration.errors }}
-      <label for="{{ form.reason_registration.id_for_label }}">Reason for registration?</label>
-      {{ form.reason_registration }}
-  </div>
+  <div class="field">
+        {{ form.reason_registration.errors }}
+        <label for="{{ form.reason_registration.id_for_label }}">Reason for registration?</label>
+        {{ form.reason_registration }}
+    </div>
 </div>
 
-  </ul>
+</ul>
 
-
-  <input class="ui primary button right floated" type="submit" value="Save" />
-
+<input class="ui primary button right floated" type="submit" value="Save" />
 
 </form>
 

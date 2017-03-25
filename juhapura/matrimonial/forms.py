@@ -13,8 +13,6 @@ class BasicProfileUpdateForm(forms.ModelForm):
 
     gender_list = [('','Gender'), ('M','Male'), ('F','Female')]
 
-    # first_name = forms.CharField()
-
     dob = forms.DateField()
 
     gender = forms.ChoiceField(choices=gender_list,
@@ -25,12 +23,10 @@ class BasicProfileUpdateForm(forms.ModelForm):
     marital_status = forms.ChoiceField(choices = Profile.marital_status_list,
     	widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
-
     contact_no = forms.IntegerField(widget=forms.TextInput(
             attrs={'placeholder': 'Please provide contact number where one can get in touch with proposal'}
             ))
 
-    # city = forms.ChoiceField(forms.Select(attrs={'class': 'ui search dropdown'}))
     reason_registration = forms.ChoiceField(choices = Profile.reason_registration_list,
     	widget=forms.Select(attrs={'class': 'ui search dropdown'}))
 
@@ -50,6 +46,7 @@ class BasicProfileUpdateForm(forms.ModelForm):
         ,'city'
         ,'country'
         ,'reason_registration'
+        ,'contact_no'
         ]
 
     def __init__(self, *args, **kwargs):
