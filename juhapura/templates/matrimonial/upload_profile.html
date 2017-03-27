@@ -24,14 +24,14 @@
   <div class="column ">
 
     <div class="ui segment stretched">
-    	<img class="ui medium  image" src="/media/{{image.profile_image}}" />       	
+    	<img class="ui medium  image" src="{{ MEDIA_URL }}{{image.profile_image}}" />
     </div>
 
     <form method="post" action="{% url 'matrimonial:delete_profileimage' pk=image.pk %}">
    	   {% csrf_token %}
        <input type="submit" class="ui red button"  value="Delete"/>
     </form>
- 
+
   </div>
 
   {% endfor %}
