@@ -11,11 +11,11 @@
 
 <!-- Action buttons -->
 <div class="row">
-
+<div class="ui form segment">
  <form action="{{ action }}" method="POST" class="form-horizontal ui form">
- 
+
   {% csrf_token %}
-  
+
   <div class="ui teal progress" id="progressbar5">
     <div class="bar"></div>
     <div class="label"></div>
@@ -32,7 +32,7 @@
           <label for="{{ form.father_name.id_for_label }}">Father name</label>
           {{ form.father_name }}
       </div>
-    
+
     <div class="field">
         {{ form.mother_name.errors }}
         <label for="{{ form.mother_name.id_for_label }}">Mother name</label>
@@ -52,10 +52,10 @@
   </ul>
 
   <input class="ui primary button right floated" type="submit" value="Save" />
-  
-  
-</form>
+ <br/><br/>
 
+</form>
+</div>
 </div>
 <!-- End Action buttons -->
 

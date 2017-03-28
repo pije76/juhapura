@@ -22,7 +22,7 @@
   <p>Contact number and adress information is Office use only. This information will not be visible to other users unless you permit.</p>
 </div>
 
-
+<div class="ui form segment">
  <form action="{{ action }}" method="POST" class="form-horizontal ui form">
   {% csrf_token %}
 
@@ -124,8 +124,9 @@
 </ul>
 
 <input class="ui primary button right floated" type="submit" value="Save" />
-
+<br/><br/>
 </form>
+</div>
 
 <!-- End Action buttons -->
 

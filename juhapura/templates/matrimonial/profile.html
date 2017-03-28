@@ -2,42 +2,50 @@
 {% load static %}
 
 {% block title %}
-{{profile.first_name}} {{profile.surname}} 
+{{profile.first_name}} {{profile.surname}}
 {% endblock %}
- 
+
 
 
 
 {% block content %}
-<h1>{{profile.first_name}} {{profile.surname}}</h1>
-
 
 <div class="ui grid">
+
+  <div class="left floated eight wide column">
+  <h1>{{profile.first_name}} {{profile.surname}}</h1>
+  </div>
+  <div class="right floated three wide column">
+    <a class="btn btn-primary" href="{% url 'matrimonial:profile_update' %}" role="button">Update Profile</a>
+  </div>
+</div>
+<div class="ui grid">
+
   <div class="eight wide column">
 	{% for image in profile_images %}
 
 	{% if forloop.first %}
 		<div class="column">
 		    <div class="ui segment ">
-		    	<img class="ui medium image" src="{{ MEDIA_URL }}{{image.profile_image}}" /> 
+		    	<img class="ui medium image" src="{{ MEDIA_URL }}{{image.profile_image}}" />
 		    </div>
 		</div>
-		
+
 	{% elif forloop.counter > 1 %}
 		<div class="ui segment">
 			<div class="ui tiny  images">
 				<img class="ui image" src="{{ MEDIA_URL }}{{image.profile_image}}" />
 			</div>
 		</div>
-		
+
 	{% endif %}
 	{%endfor%}
 
 </div>
 
   <div class="eight wide column">
-	
-	
+
+
 
   <table class="ui definition table">
 	  <thead>
@@ -49,7 +57,7 @@
 	    <tr>
 	      <td>Age</td>
 	      <td>{{profile.dob|timesince}}</td>
-	 
+
 	    </tr>
 	    <tr>
 	      <td>Marital Status</td>
@@ -101,7 +109,7 @@
 </div>
 <div class="ui grid">
 <div class="ui piled segment">
-	  <h4 class="ui header">Profile Summary</h4>	
+	  <h4 class="ui header">Profile Summary</h4>
 	  <p>{{profile.about_me}}</p>
 	</div>
 	<div class="ui piled segment">
@@ -149,7 +157,7 @@
 </div>
 
   <div class="eight wide column">
- 
+
 	<h3 class="ui header">Family Summary</h3>
 
 		<table class="ui definition table">
@@ -162,13 +170,13 @@
 			    <tr>
 			      <td>Father Name</td>
 			      <td>{{profile.father_name}}</td>
-			 
+
 			    </tr>
 			    <tr>
 			      <td>Mother Name</td>
 			      <td>{{profile.mother_name}}</td>
 			    </tr>
-			  
+
 			     <tr>
 			      <td>Family summary</td>
 			      <td>{{profile.family_summary}} </td>
@@ -176,7 +184,7 @@
 			    </tbody>
 		</table>
 
-	
+
 	</div>
 </div>
 

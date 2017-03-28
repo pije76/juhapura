@@ -8,16 +8,16 @@
 
 
 <h1 class="ui dividing header">Religion</h1>
- 
+
 
 
 <!-- Action buttons -->
 <div class="row">
-
+<div class="ui form segment">
  <form action="{{ action }}" method="POST" class="form-horizontal ui form">
- 
+
   {% csrf_token %}
-  
+
   <div class="ui teal progress" id="progressbar4">
     <div class="bar"></div>
     <div class="label"></div>
@@ -41,7 +41,7 @@
 </div>
 
    <div class="two fields">
-    
+
     <div class="field">
         {{ form.hijab.errors }}
         <label for="{{ form.hijab.id_for_label }}">Hijab</label>
@@ -57,19 +57,19 @@
   </div>
 
 <div class="two fields">
- 
+
   </div>
 
   </ul>
 
   <input class="ui primary button right floated" type="submit" value="Save" />
-  
-  
+
+  <br/><br/>
 </form>
 
 </div>
 <!-- End Action buttons -->
-
+</div>
 
 
 </div>

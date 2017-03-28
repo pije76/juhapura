@@ -8,7 +8,7 @@
 
   <div class="row">
     <div class="col-sm-12">
-    
+
      {% if object.name %}
         <h2>{{ object.name }}</h2>
       {% else %}
@@ -23,8 +23,10 @@
 
   <div class="col-sm-12">
   <a class="btn btn-primary" href="{% url 'users:profile_update' %}" role="button">Basic Profile</a>
+  <a class="btn btn-primary" href="{% url 'matrimonial:profile' %}" role="button">Matrimonial Profile</a>
 
-  <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a> 
+
+  <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
     <!-- Your Stuff: Custom user template urls -->
   </div>
 

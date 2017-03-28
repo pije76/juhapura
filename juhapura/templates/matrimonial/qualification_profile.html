@@ -9,13 +9,13 @@
 
 
     <h1 class="ui dividing header">Qualification & Work</h1>
-    
+
 
 <!-- Action buttons -->
 
-
+<div class="ui form segment">
  <form action="{{ action }}" method="POST" class="form-horizontal ui form">
- 
+
   {% csrf_token %}
 
   <div class="ui teal progress" id="progressbar3">
@@ -23,7 +23,7 @@
     <div class="label"></div>
   </div>
 
-  
+
   <ul>
      {{ form.non_field_errors }}
 
@@ -69,11 +69,11 @@
   </ul>
 
   <input class="ui primary button right floated" type="submit" value="Save" />
-  
-  
+
+  <br/><br/>
 </form>
 
-
+</div>
 <!-- End Action buttons -->
 
 
