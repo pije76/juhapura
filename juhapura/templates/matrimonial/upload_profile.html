@@ -42,8 +42,7 @@
   <div class="two fields">
       {% csrf_token %}
       {{ form.as_p }}
-      <input  type="submit" class="ui primary button right floated" value="Save" />
+      <input  type="submit" class="ui primary button right floated" value="Save & Submit" />
   </div>
 </form>
-<a href="{%url 'matrimonial:profile'%}"><button class="ui primary button right floated">Submit</button></a>
 {% endblock content %}

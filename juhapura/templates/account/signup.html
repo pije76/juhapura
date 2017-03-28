@@ -12,11 +12,48 @@
 
 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
-  {{ form|crispy }}
+  <!--{{ form|crispy }}-->
+  <div class="field">
+      {{ form.username.errors }}
+      <label for="{{ form.username.id_for_label }}">Username*</label>
+      {{ form.username }}
+  </div>
+
+   <div class="field">
+      {{ form.email.errors }}
+      <label for="{{ form.email.id_for_label }}">Email address*</label>
+      {{ form.email }}
+  </div>
+
+   <div class="field">
+      {{ form.password1.errors }}
+      <label for="{{ form.password1.id_for_label }}">Password*</label>
+      {{ form.password1 }}
+  </div>
+
+   <div class="field">
+      {{ form.password2.errors }}
+      <label for="{{ form.password2.id_for_label }}">Password (again)* </label>
+      {{ form.password2 }}
+  </div>
+
+    <div class="field">
+      {{ form.captcha.errors }}
+      <label for="{{ form.captcha.id_for_label }}">Captcha</label>
+      {{ form.captcha }}
+  </div>
+
+ <br/>
+
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
+
+
   <button class="btn btn-primary" type="submit">{% trans "Sign Up" %} &raquo;</button>
+
+
+
 </form>
 
 {% endblock %}

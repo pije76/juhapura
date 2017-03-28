@@ -12,7 +12,7 @@ django-environ==0.4.1
 django-braces==1.11.0
 django-crispy-forms==1.6.1
 
-#multi-upload 
+#multi-upload
 django-multiupload==0.5.2
 
 # Models
@@ -44,3 +44,4 @@ django-countries-plus==1.1
 
 
 # Your custom requirements go here
+django-recaptcha==1.2.0

@@ -54,7 +54,8 @@ THIRD_PARTY_APPS = (
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
-    'countries_plus'
+    'countries_plus',
+    'captcha'
 )
 
 # Apps specific for this project go here.
@@ -276,3 +277,10 @@ ADMIN_URL = r'^admin/'
 # ------------------------------------------------------------------------------
 
 DATE_INPUT_FORMATS = ('%d-%m-%Y')
+
+
+RECAPTCHA_PUBLIC_KEY = '6LcxewUTAAAAAHAAPCu468E7Zk6N4gkJ2BLHwbXY'
+RECAPTCHA_PRIVATE_KEY = '6LcxewUTAAAAABGGMPKj9so4ml2RtxxG4QiaKKCL'
+
+ACCOUNT_SIGNUP_FORM_CLASS = 'juhapura.users.forms.AllauthSignupForm'
+NOCAPTCHA = True
