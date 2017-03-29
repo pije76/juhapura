@@ -63,7 +63,8 @@ LOCAL_APPS = (
     # custom users app
     'juhapura.users.apps.UsersConfig',
     # Your stuff: custom apps go here
-    'juhapura.matrimonial.apps.MatrimonialConfig'
+    'juhapura.matrimonial.apps.MatrimonialConfig',
+    'juhapura.scholarship.apps.ScholarshipConfig'
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

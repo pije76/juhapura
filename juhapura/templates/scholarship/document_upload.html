@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+<h1>Apply for Scholarship</h1>
+<div class="ui form segment">
+
+  {% if documents %}
+
+    <h3>Uploaded document(s)</h3>
+    {% for document in documents %}
+
+       {{forloop.counter}}. <a href="{{ MEDIA_URL }}{{document.document}}">{{ document.document }}</a>
+
+      <form method="post" action="{% url 'scholarship:delete_document' pk=document.pk %}">
+   	   {% csrf_token %}
+       <input type="submit" class="ui red mini button"  value="Delete"/>
+    </form>
+
+
+    <br/>
+    {% endfor %}
+
+ {% endif %}
+  <br/><br/>
+   <form action="{{ action }}" method="POST" class="form-horizontal ui form" enctype="multipart/form-data">
+  {% csrf_token %}
+
+     <!--{{form.as_p}}-->
+
+     <div class="field">
+          <label for="{{ form.document.id_for_label }}">Upload Supporting Documents</label>
+          {{ form.document.errors }}
+          {{ form.document }}
+
+
+      </div>
+
+     <input class="ui primary button right floated" name="submit" type="submit" value="Submit" />
+     <input class="ui primary button right floated" type="submit" value="Save" />
+
+
+<br/><br/>
+   </form>
+</div>
+{% endblock %}

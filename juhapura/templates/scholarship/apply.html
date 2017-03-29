@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+<h1>Apply for Scholarship</h1>
+<div class="ui form segment">
+   <form action="{{ action }}" method="POST" class="form-horizontal ui form">
+  {% csrf_token %}
+
+     <!--{{form.as_p}}-->
+
+     <div class="two fields">
+       <div class="field">
+
+          <label for="{{ form.first_name.id_for_label }}">First name</label>
+            {{ form.first_name.errors }}
+          {{ form.first_name }}
+      </div>
+
+       <div class="field">
+          <label for="{{ form.surname.id_for_label }}">Surname</label>
+          {{ form.surname.errors }}
+          {{ form.surname }}
+      </div>
+
+
+
+     </div>
+
+     <div class="two fields">
+
+         <div class="field">
+          <label for="{{ form.dob.id_for_label }}">Date of Birth</label>
+          {{ form.dob.errors }}
+          {{ form.dob }}
+      </div>
+
+         <div class="field">
+          <label for="{{ form.gender.id_for_label }}">Gender</label>
+          {{ form.gender.errors }}
+          {{ form.gender }}
+      </div>
+
+     </div>
+
+
+     <div class="two fields">
+
+       <div class="field">
+          <label for="{{ form.ahd_resident.id_for_label }}">Are you resident of Ahmedabad?</label>
+          {{ form.ahd_resident.errors }}
+          {{ form.ahd_resident }}
+      </div>
+
+        <div class="field">
+          <label for="{{ form.address.id_for_label }}">Current Address</label>
+          {{ form.address.errors }}
+          {{ form.address }}
+        </div>
+
+
+     </div>
+
+       <div class="field">
+          <label for="{{ form.education_history.id_for_label }}">Education History</label>
+          {{ form.education_history.errors }}
+          {{ form.education_history }}
+      </div>
+
+
+     <div class="field">
+          <label for="{{ form.grant_before.id_for_label }}">Have you applied before</label>
+          {{ form.grant_before.errors }}
+          {{ form.grant_before }}
+      </div>
+
+     <div class="field">
+          <label for="{{ form.statement.id_for_label }}">Statement</label>
+          {{ form.statement.errors }}
+          {{ form.statement }}
+      </div>
+
+      <input class="ui primary button right floated" type="submit" value="Save" />
+
+
+<br/><br/>
+   </form>
+</div>
+{% endblock %}

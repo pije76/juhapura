@@ -20,10 +20,11 @@ urlpatterns = [
     url(r'^users/', include('juhapura.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
 
-    
+
     # Your stuff: custom urls includes go here
     url(r'^matrimonial/', include('juhapura.matrimonial.urls', namespace='matrimonial')),
     url(r'^property/', include('juhapura.property.urls', namespace='property')),
+    url(r'^scholarship/', include('juhapura.scholarship.urls', namespace='scholarship')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
