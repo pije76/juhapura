@@ -17,6 +17,11 @@ urlpatterns = [
         name='apply'
     ),
     url(
+        regex=r'^view/$',
+        view=views.ScholarshipView.as_view(),
+        name='view'
+    ),
+    url(
         regex=r'^upload/$',
         view=views.DocumentUploadFormView.as_view(),
         name='document_upload'

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+{{scholarship.first_name}} {{scholarship.surname}}
+{{scholarship.dob}} <br/>
+
+{{scholarship.gender}}<br/>
+{{scholarship.address}}<br/>
+{{scholarship.ahd_resident}}<br/>
+{{scholarship.education_history}}<br/>
+{{scholarship.grant_before}}<br/>
+{{scholarship.statement}}<br/><br/>
+
+
+Documents:<br/>
+{%for doc in documents %}
+
+{{doc.document}}<br/>
+
+{%endfor%}
+
+{% endblock %}
