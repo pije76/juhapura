@@ -5,13 +5,22 @@
 
 {% block content %}
 <h1>Apply for Scholarship</h1>
+{% if object.date_submitted %}
+<p> You have already applied</p>
+<a href='{% url 'scholarship:view'  %}'>
+<button type="submit" class="ui green button floated">
+    <i class="icon student"></i>
+   View your submission
+  </button>
+</a>
+{%else%}
 <div class="ui form segment">
    <form action="{{ action }}" method="POST" class="form-horizontal ui form">
   {% csrf_token %}
 
      <!--{{form.as_p}}-->
 
-     <div class="two fields">
+     <div class="three fields">
        <div class="field">
 
           <label for="{{ form.first_name.id_for_label }}">First name</label>
@@ -25,7 +34,11 @@
           {{ form.surname }}
       </div>
 
-
+       <div class="field">
+          <label for="{{ form.contact_number.id_for_label }}">Contact number</label>
+          {{ form.contact_number.errors }}
+          {{ form.contact_number }}
+      </div>
 
      </div>
 
@@ -71,7 +84,7 @@
 
 
      <div class="field">
-          <label for="{{ form.grant_before.id_for_label }}">Have you applied before</label>
+          <label for="{{ form.grant_before.id_for_label }}">Have you applied scholarship before?</label>
           {{ form.grant_before.errors }}
           {{ form.grant_before }}
       </div>
@@ -88,4 +101,5 @@
 <br/><br/>
    </form>
 </div>
+{%endif %}
 {% endblock %}

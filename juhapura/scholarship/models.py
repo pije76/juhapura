@@ -16,6 +16,8 @@ class Scholarship(models.Model):
 
     dob = models.DateField(_('Date of Birth'), null=True)
 
+    contact_number = models.CharField(_('Contact Number'), blank=True,  max_length=15, null=True)
+
     gender = models.CharField(choices=ChoiceLists.gender_list, default='M', null=True, max_length=1)
 
     address = models.TextField(_('Address'), blank=True, max_length=255)

@@ -28,6 +28,7 @@ class ScholarshipForm(forms.ModelForm):
         fields=[
             'first_name',
             'surname',
+            'contact_number',
             'dob',
             'gender',
             'address',

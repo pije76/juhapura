@@ -10,14 +10,14 @@
   {% if documents %}
 
     <h3>Uploaded document(s)</h3>
-    {% for document in documents %}
+    {% for key, value in documents.items %}
 
-       {{forloop.counter}}. <a href="{{ MEDIA_URL }}{{document.document}}">{{ document.document }}</a>
+       {{forloop.counter}}. <a href="{{ MEDIA_URL }}{{value.document}}">{{ key }}</a>
 
-      <form method="post" action="{% url 'scholarship:delete_document' pk=document.pk %}">
-   	   {% csrf_token %}
-       <input type="submit" class="ui red mini button"  value="Delete"/>
-    </form>
+        <form method="post" action="{% url 'scholarship:delete_document' pk=value.pk %}">
+         {% csrf_token %}
+         <input type="submit" class="ui red mini button"  value="Delete"/>
+        </form>
 
 
     <br/>

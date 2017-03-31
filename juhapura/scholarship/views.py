@@ -3,7 +3,7 @@ from django.views.generic import TemplateView, CreateView, FormView, DeleteView,
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
 from juhapura.users.models import User
-
+from juhapura.utils.models import ChoiceLists
 from .models import Scholarship, Document
 from .forms import ScholarshipForm, DocumentUploadForm
 from datetime import datetime
@@ -17,8 +17,10 @@ class IndexView(TemplateView):
 
     def get_object(self):
         # Only get the User record for the user making the request
-        return Scholarship.objects.filter(user=self.request.user.id)
-
+        try:
+            return Scholarship.objects.get(user=self.request.user.id)
+        except Scholarship.DoesNotExist:
+            return Scholarship.objects.none()
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['Scholarship'] = self.get_object()
@@ -67,13 +69,15 @@ class DocumentUploadFormView(LoginRequiredMixin, FormView):
     def get_context_data(self, **kwargs):
         scholarship = Scholarship.objects.get(user=self.request.user)
         context = super(DocumentUploadFormView, self).get_context_data(**kwargs)
-        context['documents'] = Document.objects.filter(scholarship=scholarship)
+        context['documents'] = {}
+        for doc in Document.objects.filter(scholarship=scholarship):
+            context['documents'][str(doc.document).split('/')[-1]] = doc
         return context
 
     def form_valid(self, form):
 
-        user = User.objects.get(pk=self.request.user.id)
-        scholarship = Scholarship.objects.get(user=user)
+        # user = User.objects.get(pk=self.request.user)
+        scholarship = Scholarship.objects.get(user=self.request.user)
         for each in form.cleaned_data['document']:
             if (Document.objects.filter(scholarship=scholarship).count() < 5):
                 Document.objects.create(document=each,scholarship=scholarship)
@@ -86,13 +90,18 @@ class DocumentUploadFormView(LoginRequiredMixin, FormView):
 
     def post(self, request, *args, **kwargs):
         if 'submit' in request.POST:
-            user = User.objects.get(pk=self.request.user.id)
-            scholarship = Scholarship.objects.get(user=user)
+            # user = User.objects.get(pk=self.request.user.id)
+            scholarship = Scholarship.objects.get(user=self.request.user)
             scholarship.date_submitted = datetime.now()
             scholarship.save()
         return super(DocumentUploadFormView, self).post(request, *args, **kwargs)
 
-
+    def get(self, request, *args, **kwargs):
+        scholarship = Scholarship.objects.get(user=self.request.user)
+        # if scholarship.date_submitted:
+        #     return reverse('scholarship:view')
+        context = self.get_context_data()
+        return self.render_to_response(context)
 
 class DocumentDeleteView(LoginRequiredMixin, DeleteView):
     model = Document
@@ -104,8 +113,13 @@ class ScholarshipView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ScholarshipView, self).get_context_data(**kwargs)
-        context["scholarship"] = Scholarship.objects.get(user= self.request.user.id)
-        context["documents"] = Document.objects.filter(scholarship= context["scholarship"])
+        context["scholarship"] = Scholarship.objects.get(user= self.request.user)
+        context["gender"] = dict(ChoiceLists.gender_list).get(context["scholarship"].gender)
+        context["grant_before"] = dict(ChoiceLists.yes_no_list).get(context["scholarship"].grant_before)
+        context["ahd_resident"] = dict(ChoiceLists.yes_no_list).get(context["scholarship"].ahd_resident)
+        context['documents'] = {}
+        for doc in Document.objects.filter(scholarship=context["scholarship"]):
+            context['documents'][str(doc.document).split('/')[-1]] = doc
         return context
 
     def get(self, request, *args, **kwargs):

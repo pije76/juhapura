@@ -4,23 +4,35 @@
 
 
 {% block content %}
+<div class="ui grid">
 
-{{scholarship.first_name}} {{scholarship.surname}}
-{{scholarship.dob}} <br/>
-
-{{scholarship.gender}}<br/>
-{{scholarship.address}}<br/>
-{{scholarship.ahd_resident}}<br/>
-{{scholarship.education_history}}<br/>
-{{scholarship.grant_before}}<br/>
-{{scholarship.statement}}<br/><br/>
-
-
-Documents:<br/>
-{%for doc in documents %}
-
-{{doc.document}}<br/>
+  <div class="ui text container">
+    <h1>Your application</h1>
+    <strong>Your name:</strong><br/>
+    {{scholarship.first_name}} {{scholarship.surname}} <br/><br/>
+    <strong>Date of birth:</strong><br/>
+    {{scholarship.dob}} <br/><br/>
+   <strong>Gender: </strong><br/>
+    {{gender}}<br/><br/>
+    <strong>Address:</strong><br/>
+    {{scholarship.address}}<br/><br/>
+    <strong>Are you ahmedabad resident:</strong><br/>
+    {{ahd_resident}}<br/><br/>
+    <strong>Education history:</strong><br/>
+    {{scholarship.education_history}}<br/><br/>
+    <strong>Grant before:</strong><br/>
+    {{grant_before}}<br/><br/>
+    <strong>Statement:</strong><br/>
+    {{scholarship.statement}}<br/><br/>
+<strong>Documents:</strong><br/>
+{%for key,value in documents.items %}
+    {{forloop.counter}}. <a href="{{ MEDIA_URL }}{{value.document}}">{{key}}</a><br/>
 
 {%endfor%}
+  <br/><br/>
+    <strong>Submitted On:</strong><br/> {{scholarship.date_submitted}}
+  </div>
+
+  </div>
 
 {% endblock %}
